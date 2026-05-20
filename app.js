@@ -1114,6 +1114,16 @@ function renderBracket() {
     num: finNum
   };
 
+  const thirdMatchDef = KO_TREE.thirdPlace ? KO_TREE.thirdPlace[0] : null;
+  const thirdNum = thirdMatchDef ? thirdMatchDef.num : 103;
+  const thirdMt = state.matchTeams[thirdNum] || {};
+  const thirdMatch = {
+    team1: thirdMt.team1,
+    team2: thirdMt.team2,
+    winner: state.knockoutResults[thirdNum] || null,
+    num: thirdNum
+  };
+
   const r32Tops = r32.map((_, i) => LABEL_H + i * STEP);
 
   function centerOf(top) {
@@ -1144,6 +1154,10 @@ function renderBracket() {
   if (sfTops.length === 2) {
     finalTop = ((centerOf(sfTops[0]) + centerOf(sfTops[1])) / 2) - SLOT_H;
   }
+
+  // El partido por el 3er puesto vive entre las dos semifinales, en la
+  // misma columna de semis. La final se queda a la derecha como siempre.
+  const thirdTop = finalTop;
 
   const maxH = LABEL_H + r32.length * STEP + 40;
 
@@ -1206,6 +1220,28 @@ function renderBracket() {
       const y = centerOf(top);
       svg.appendChild(mkPath(`M${sx},${y} L${mx},${y} L${mx},${yd} L${dx},${yd}`));
     });
+  }
+
+  function connectSemisToThirdPlace() {
+    if (sfTops.length !== 2 || !thirdMatchDef) return;
+
+    const x = cols[3] + (COL_W / 2) - 3;
+    const upperBottom = sfTops[0] + MATCH_H;
+    const lowerTop = sfTops[1];
+    const thirdTopEdge = thirdTop - 6;
+    const thirdBottomEdge = thirdTop + MATCH_H + 6;
+
+    if (upperBottom < thirdTopEdge) {
+      const p1 = mkPath(`M${x},${upperBottom} L${x},${thirdTopEdge}`);
+      p1.setAttribute('stroke-width', '2');
+      svg.appendChild(p1);
+    }
+
+    if (thirdBottomEdge < lowerTop) {
+      const p2 = mkPath(`M${x},${thirdBottomEdge} L${x},${lowerTop}`);
+      p2.setAttribute('stroke-width', '2');
+      svg.appendChild(p2);
+    }
   }
 
   wrapper.appendChild(svg);
@@ -1290,11 +1326,45 @@ function renderBracket() {
   connect(r16Tree, r16Tops, qfTree, qfTops, cols[1], cols[2]);
   connect(qfTree, qfTops, sfTree, sfTops, cols[2], cols[3]);
   connectSemisToFinal();
+  connectSemisToThirdPlace();
 
   drawRound(r32, r32Tops, 0);
   drawRound(r16, r16Tops, 1);
   drawRound(qf, qfTops, 2);
   drawRound(sf, sfTops, 3);
+
+  if (thirdMatchDef) {
+    const thirdLabel = document.createElement('div');
+    thirdLabel.className = 'bracket-round-label';
+    thirdLabel.style.cssText =
+      'position:absolute;top:' + Math.max(LABEL_H, thirdTop - 26) + 'px;left:' + cols[3] + 'px;width:' + COL_W + 'px;text-align:center;color:#2E7D32;z-index:3;';
+    thirdLabel.textContent = '3er puesto';
+    wrapper.appendChild(thirdLabel);
+
+    const thirdWinner = thirdMatch.winner || null;
+    wrapper.appendChild(
+      slotDiv(
+        thirdMatch.team1,
+        Boolean(thirdMatch.team1 && thirdWinner && thirdMatch.team1 === thirdWinner),
+        thirdNum,
+        1,
+        thirdTop,
+        cols[3],
+        'third-place-slot'
+      )
+    );
+    wrapper.appendChild(
+      slotDiv(
+        thirdMatch.team2,
+        Boolean(thirdMatch.team2 && thirdWinner && thirdMatch.team2 === thirdWinner),
+        thirdNum,
+        2,
+        thirdTop + SLOT_H,
+        cols[3],
+        'third-place-slot'
+      )
+    );
+  }
 
   const finalWinner = finalMatch.winner || null;
 
@@ -1776,7 +1846,8 @@ function getKnockoutProgressPointsForTeam(team, roundName, realStageTeams, predi
     round16: 'round16',
     quarterfinals: 'quarterfinals',
     semifinals: 'semifinals',
-    final: 'finalist'
+    final: 'finalist',
+    thirdPlace: 'thirdPlace'
   };
 
   const stage = stageByRound[roundName];
@@ -2060,7 +2131,7 @@ function openScoringHelpModal() {
       </div>
 
       <div class="scoring-help-footer">
-        Los resultados y las puntuaciones NO son reales, se resetearán a 0 cuando comience el mundial. Es solo un ejemplo aleatorio.”.
+        Los resultados y las puntuaciones NO son reales, se resetearán a 0 cuando comience el mundial. Es solo un ejemplo aleatorio.
       </div>
     </div>
   `;
@@ -2596,6 +2667,16 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
     num: finNum
   };
 
+  const thirdMatchDef = KO_TREE.thirdPlace?.[0];
+  const thirdNum = thirdMatchDef ? thirdMatchDef.num : 103;
+  const thirdMt = reviewState.matchTeams[thirdNum] || {};
+  const thirdMatch = {
+    team1: thirdMt.team1,
+    team2: thirdMt.team2,
+    winner: reviewState.knockoutResults[thirdNum] || null,
+    num: thirdNum
+  };
+
   const r32Tops = r32.map((_, i) => TITLE_H + LABEL_H + i * STEP);
 
   function centerOf(top) {
@@ -2619,6 +2700,8 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
   if (sfTops.length === 2) {
     finalTop = ((centerOf(sfTops[0]) + centerOf(sfTops[1])) / 2) - SLOT_H;
   }
+
+  const thirdTop = finalTop;
 
   const maxH = TITLE_H + LABEL_H + r32.length * STEP + 40;
 
@@ -2689,10 +2772,33 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
     });
   }
 
+  function connectSemisToThirdPlace() {
+    if (sfTops.length !== 2 || !thirdMatchDef) return;
+
+    const x = cols[3] + (COL_W / 2) - 3;
+    const upperBottom = sfTops[0] + MATCH_H;
+    const lowerTop = sfTops[1];
+    const thirdTopEdge = thirdTop - 6;
+    const thirdBottomEdge = thirdTop + MATCH_H + 6;
+
+    if (upperBottom < thirdTopEdge) {
+      const p1 = mkPath(`M${x},${upperBottom} L${x},${thirdTopEdge}`);
+      p1.setAttribute('stroke-width', '2');
+      svg.appendChild(p1);
+    }
+
+    if (thirdBottomEdge < lowerTop) {
+      const p2 = mkPath(`M${x},${thirdBottomEdge} L${x},${lowerTop}`);
+      p2.setAttribute('stroke-width', '2');
+      svg.appendChild(p2);
+    }
+  }
+
   connect(r32Tree, r32Tops, r16Tree, r16Tops, cols[0], cols[1]);
   connect(r16Tree, r16Tops, qfTree, qfTops, cols[1], cols[2]);
   connect(qfTree, qfTops, sfTree, sfTops, cols[2], cols[3]);
   connectSemisToFinal();
+  connectSemisToThirdPlace();
   wrapper.appendChild(svg);
 
   function slotDiv(team, winner, top, left, matchNum, roundName) {
@@ -2746,6 +2852,18 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
   drawRound(r16, r16Tops, 1);
   drawRound(qf, qfTops, 2);
   drawRound(sf, sfTops, 3);
+
+  if (thirdMatchDef) {
+    const thirdLabel = document.createElement('div');
+    thirdLabel.className = 'bracket-round-label';
+    thirdLabel.style.cssText =
+      'position:absolute;top:' + Math.max(TITLE_H + LABEL_H, thirdTop - 26) + 'px;left:' + cols[3] + 'px;width:' + COL_W + 'px;text-align:center;color:#2E7D32;z-index:3;';
+    thirdLabel.textContent = '3er puesto';
+    wrapper.appendChild(thirdLabel);
+
+    wrapper.appendChild(slotDiv(thirdMatch.team1, thirdMatch.winner, thirdTop, cols[3], thirdMatch.num, 'thirdPlace'));
+    wrapper.appendChild(slotDiv(thirdMatch.team2, thirdMatch.winner, thirdTop + SLOT_H, cols[3], thirdMatch.num, 'thirdPlace'));
+  }
 
   wrapper.appendChild(slotDiv(finalMatch.team1, finalMatch.winner, finalTop, cols[4], finalMatch.num, 'final'));
   wrapper.appendChild(slotDiv(finalMatch.team2, finalMatch.winner, finalTop + SLOT_H, cols[4], finalMatch.num, 'final'));
