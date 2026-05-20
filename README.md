@@ -1,114 +1,39 @@
-# ⚽ World Cup 2026 Prediction Game
+# Mundial FIFA 2026 - Juego de Predicciones (Porra)
 
-A very serious and enterprise-grade football prediction platform made with cutting-edge technologies such as:
+Una aplicación web desarrollada con IA para pasar un buen rato con amigos haciendo predicciones sobre el Mundial de la FIFA 2026.
 
-- AI-generated code
-- Blind faith
+## ¿Qué permite hacer la aplicación?
 
-Just to make dumb bets with your friends during the 2026 World Cup.
+Esta plataforma es ideal para organizar una "porra" del Mundial 2026 con tu grupo de amigos. Cada participante puede hacer sus pronósticos completos sobre el torneo y competir para ver quién acierta más.
 
-That’s it.
+Características principales:
+- **Fase de Grupos**: Permite pronosticar los resultados de cada grupo y determinar cómo quedarán las clasificaciones.
+- **Mejores Terceros**: Calcula y organiza los mejores terceros basándose en los resultados de la fase de grupos.
+- **Rondas Eliminatorias**: Completa el cuadro (bracket) de las rondas eliminatorias hasta decidir el ganador de la final.
+- **Premios Individuales**: Apuesta por los ganadores de la Bota de Oro y el Balón de Oro (primer, segundo y tercer puesto).
+- **Ranking de Jugadores**: Visualiza una tabla de clasificación donde se comparan las puntuaciones y aciertos de todos los participantes.
+- **Integración con Google Sheets**: Los datos de las predicciones se guardan y leen desde un Google Sheet para gestionar las apuestas del grupo de manera sencilla y sin necesidad de servidor (backend).
 
----
+## Tecnologías utilizadas
 
-## Disclaimer
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
 
-I have not really read most of this code.
+## Cómo montar tu propio grupo de predicciones
 
-An AI (multiple) wrote basically all of it, I glued some things together, pressed save, and somehow it works.  
-If you open the source and find horrors beyond human comprehension: yes, expected.
+Si quieres usar esta aplicación con tus amigos, sigue estos pasos:
 
-There is almost certainly:
+### 1. Haz un Fork del repositorio
+Copia este proyecto a tu propia cuenta de GitHub para tener control sobre el código.
 
-- Duplicated code
-- Bad formatting
-- Weird variable names
-- Functions doing 14 things at once
-- CSS crimes
-- Questionable architecture
-- Things that should absolutely not work but somehow do
+### 2. Crea tu propio Google Sheet
+Prepara una hoja de cálculo de Google Sheets manteniendo la estructura de datos que utiliza la aplicación.
+A continuación, ve a `Archivo` -> `Compartir` -> `Publicar en la web` y publícalo en formato **CSV**.
 
-And honestly? I do not care.
+### 3. Vincula tu hoja de cálculo
+Busca en el código JavaScript la URL que hace referencia al documento original de Google Sheets y sustitúyela por el enlace CSV público de tu nueva hoja de cálculo.
 
-Use it if you want.  
-Fork it if you want.  
-Judge me if you want.
+## Licencia
 
----
-
-## What does it do?
-
-- Lets people predict:
-  - Group stage standings
-  - Best 3rd place teams
-  - Knockout bracket
-  - Individual awards
-- Saves predictions to a Google Sheet
-- Displays a leaderboard
-- Probably breaks in Internet Explorer (good)
-
----
-
-## How to use your own Google Sheet
-
-If you want to use this for your own friend group:
-
-### 1. Fork the repo
-
-Click the big scary fork button.
-
----
-
-### 2. Create your own Google Sheet
-
-Make a sheet with whatever structure the current one uses.
-
-Then:
-
-- `File`
-- `Share`
-- `Publish to web`
-- Publish as **CSV**
-
-Google Sheets will give you a public CSV URL.
-
----
-
-### 3. Replace my Google Sheet URL
-
-Somewhere in the JavaScript there’s a hardcoded URL pointing to my sheet.
-
-Replace it with yours.
-
-Good luck finding it.  
-(I genuinely don't remember where it is.)
-
----
-
-## Tech Stack
-
-- HTML
-- CSS
-- JavaScript
-- Poor decisions
-
----
-
-## Known Issues
-
-- Yes
-- Probably many
-- Don't ask me
-- If something breaks just say it’s “dynamic”
-
----
-
-## License
-
-Do whatever you want with it.
-
-If it explodes in production during the World Cup final and your friends accuse you of rigging the leaderboard, that’s on you.
-
----
-
-*Even this README was written by an AI. Imagine what the code looks like.*
+Puedes utilizar, modificar y hacer fork de este proyecto libremente para organizar tus propias predicciones del Mundial.

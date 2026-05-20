@@ -1,0 +1,27 @@
+{
+  "name": "04-worldcup2026",
+  "version": "1.0.0",
+  "description": "A very serious and enterprise-grade football prediction platform made with cutting-edge technologies such as:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dani73ag/worldcup2026.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dani73ag/worldcup2026/issues"
+  },
+  "homepage": "https://github.com/dani73ag/worldcup2026#readme",
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0",
+    "jscpd": "^4.2.3"
+  }
+}
