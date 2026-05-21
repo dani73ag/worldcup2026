@@ -23,5 +23,8 @@
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
     "jscpd": "^4.2.3"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
   }
 }
