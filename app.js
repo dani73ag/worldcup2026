@@ -4,13 +4,13 @@
 
 const DATA_SRC =
   "https://raw.githubusercontent.com/openfootball/worldcup.json/refs/heads/master/2026";
-// Cambiar estos valores por los enlaces del google sheet y el formulario
-const LEADERBOARD_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjp_h2I1C6_VVJH5azB0majnPJFpYPK8ITkR9PbKgHs6ZbySsbNBGX6wuninxIGKG2L1xe1JYEcPAP/pub?gid=211280431&single=true&output=csv"; //mi google sheet
-const FORM_ID = "1FAIpQLScCm4A0_nOpUMmZX4gOzn9n4CusiCPA6S-OgV9BYFlkqAmvQw"; //mi formulario
-const ENTRY_ID = "entry.1894069950";
 
-// Puedes cambiar los valores por tus propias puntuaciones si quieres
+//mi google sheet
+const LEADERBOARD_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjp_h2I1C6_VVJH5azB0majnPJFpYPK8ITkR9PbKgHs6ZbySsbNBGX6wuninxIGKG2L1xe1JYEcPAP/pub?gid=211280431&single=true&output=csv"; 
+const FORM_ID = "1FAIpQLScCm4A0_nOpUMmZX4gOzn9n4CusiCPA6S-OgV9BYFlkqAmvQw"; //mi formulario
+const ENTRY_ID = "entry.1894069950"; //entry id del formulario
+
+// Puedes cambiar los valores por tus propias puntuaciones
 const puntuaciones = {
   grupos: {
     partido: {
