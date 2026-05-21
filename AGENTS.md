@@ -5,7 +5,7 @@
 Vanilla JS/HTML/CSS app for World Cup 2026 predictions. No framework, no backend — everything is client-side plus Google Sheets integration.
 
 - Entry point: `index.html` → loads `app.js`, `results.js`, `third_place_table.js`
-- Repo: `dani73ag/worldcup2026` (fork of `jjimenezgarcia/worldcup2026-prediction`)
+- Repo: `dani73ag/worldcup2026`
 - Upstream remote already configured as `upstream`
 
 ## Critical data flow
@@ -55,12 +55,12 @@ scraper/
 
 Wikipedia uses full names. The app uses abbreviated names. Mapping is in `scraper/sources/wikipedia.js`:
 
-| Wikipedia | App |
-|-----------|-----|
-| United States | USA |
-| Korea Republic | South Korea |
+| Wikipedia              | App                  |
+| ---------------------- | -------------------- |
+| United States          | USA                  |
+| Korea Republic         | South Korea          |
 | Bosnia and Herzegovina | Bosnia & Herzegovina |
-| Côte d'Ivoire | Ivory Coast |
+| Côte d'Ivoire          | Ivory Coast          |
 
 If scraping produces wrong scores, check that Wikipedia team names match what the app expects.
 

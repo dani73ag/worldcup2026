@@ -50,7 +50,7 @@
         <!-- Knockout Bracket -->
         <h2 class="section-title">🥊 Eliminatorias</h2>
         <p class="note-text">
-          Esto de cajón cómo funciona. Si te hacen falta instrucciones aquí,
+          Esto de cajón cómo funciona. Si te hacen falta instrucciones aquí, te
           mereces palmar.
         </p>
         <div class="bracket-wrapper">
@@ -114,51 +114,57 @@
       </div>
     </div>
 
-  <div class="prediction-modal-overlay" id="predictionModal" style="display:none;">
-    <div class="prediction-modal">
-      <button class="prediction-modal-close" id="closePredictionModal">×</button>
-      <div id="predictionViewer"></div>
-    </div>
-  </div>
-
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loadingOverlay" style="display:none;">
-    <span class="ball-spinner">&#9917;</span>
-    <p id="loadingText">Cargando...</p>
-  </div>
-
-  <!-- Toast container -->
-  <div id="toastContainer"></div>
-
-  <!-- Confetti container -->
-  <div class="confetti-container" id="confettiContainer"></div>
-
-  <script src="third_place_table.js"></script>
-  <script src="results.js"></script>
-  <script src="app.js?v=group-rules-positions-only"></script>
-
-  <div class="name-modal-overlay" id="nameModal" style="display: none">
-    <div class="name-modal">
-      <h3>Así que te crees el gurú del mundial, ¿eh?</h3>
-      <p>¿Quién eres?</p>
-
-      <input
-        type="text"
-        id="playerNameInput"
-        class="name-modal-input"
-        placeholder="Your name"
-        maxlength="40"
-      />
-
-      <div class="name-modal-actions">
-        <button type="button" class="toolbar-btn" id="cancelNameSubmit">
-          Paso
+    <div
+      class="prediction-modal-overlay"
+      id="predictionModal"
+      style="display: none"
+    >
+      <div class="prediction-modal">
+        <button class="prediction-modal-close" id="closePredictionModal">
+          ×
         </button>
-        <button type="button" class="submit-btn" id="confirmNameSubmit">
-          Apostar
-        </button>
+        <div id="predictionViewer"></div>
       </div>
     </div>
-  </div>
-</body>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none">
+      <span class="ball-spinner">&#9917;</span>
+      <p id="loadingText">Cargando...</p>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toastContainer"></div>
+
+    <!-- Confetti container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script src="third_place_table.js"></script>
+    <script src="results.js"></script>
+    <script src="app.js?v=group-rules-positions-only"></script>
+
+    <div class="name-modal-overlay" id="nameModal" style="display: none">
+      <div class="name-modal">
+        <h3>Así que te crees el gurú del mundial, ¿eh?</h3>
+        <p>¿Quién eres?</p>
+
+        <input
+          type="text"
+          id="playerNameInput"
+          class="name-modal-input"
+          placeholder="Your name"
+          maxlength="40"
+        />
+
+        <div class="name-modal-actions">
+          <button type="button" class="toolbar-btn" id="cancelNameSubmit">
+            Paso
+          </button>
+          <button type="button" class="submit-btn" id="confirmNameSubmit">
+            Apostar
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

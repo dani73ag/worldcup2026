@@ -1,7 +1,7 @@
 {
   "name": "04-worldcup2026",
   "version": "1.0.0",
-  "description": "A very serious and enterprise-grade football prediction platform made with cutting-edge technologies such as:",
+  "description": "A football prediction app to have a good time with friends using technologies such as:",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
