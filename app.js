@@ -33,8 +33,8 @@ const puntuaciones = {
     thirdPlace: 15,
   },
   premios: {
-    goldenBoot: [15, 10, 5],
-    goldenBall: [15, 10, 5],
+    goldenBoot: [15],
+    goldenBall: [15],
   },
 };
 
@@ -444,7 +444,7 @@ let state = {
   thirdPlace: [],
   matchTeams: {}, // matchId -> { team1, team2 }
   knockoutResults: {}, // matchId -> winner team name
-  awards: { goldenBoot: ["", "", ""], goldenBall: ["", "", ""] },
+  awards: { goldenBoot: [""], goldenBall: [""] },
 };
 
 const LOCAL_STORAGE_VERSION = "5";
@@ -529,8 +529,8 @@ function restoreLocalPrediction() {
 
     if (data.awards) {
       state.awards = {
-        goldenBoot: data.awards.goldenBoot || ["", "", ""],
-        goldenBall: data.awards.goldenBall || ["", "", ""],
+        goldenBoot: data.awards.goldenBoot || [""],
+        goldenBall: data.awards.goldenBall || [""],
       };
     }
 
@@ -1896,11 +1896,7 @@ function clearKnockoutAndRender(team) {
 // ---- Awards ----
 const AWARD_SELECT_IDS = [
   "awardGb1",
-  "awardGb2",
-  "awardGb3",
   "awardBa1",
-  "awardBa2",
-  "awardBa3",
 ];
 
 function getPlayerByName(name) {
@@ -2073,13 +2069,9 @@ function readAwards() {
   return {
     goldenBoot: [
       document.getElementById("awardGb1")?.value || "",
-      document.getElementById("awardGb2")?.value || "",
-      document.getElementById("awardGb3")?.value || "",
     ],
     goldenBall: [
       document.getElementById("awardBa1")?.value || "",
-      document.getElementById("awardBa2")?.value || "",
-      document.getElementById("awardBa3")?.value || "",
     ],
   };
 }
@@ -2090,15 +2082,13 @@ function fillAwards(a) {
   if (!a) return;
 
   if (a.goldenBoot) {
-    document.getElementById("awardGb1").value = a.goldenBoot[0] || "";
-    document.getElementById("awardGb2").value = a.goldenBoot[1] || "";
-    document.getElementById("awardGb3").value = a.goldenBoot[2] || "";
+    const gb1 = document.getElementById("awardGb1");
+    if (gb1) gb1.value = a.goldenBoot[0] || "";
   }
 
   if (a.goldenBall) {
-    document.getElementById("awardBa1").value = a.goldenBall[0] || "";
-    document.getElementById("awardBa2").value = a.goldenBall[1] || "";
-    document.getElementById("awardBa3").value = a.goldenBall[2] || "";
+    const ba1 = document.getElementById("awardBa1");
+    if (ba1) ba1.value = a.goldenBall[0] || "";
   }
 
   syncAwardCustomSelects();
@@ -2450,20 +2440,12 @@ function scorePrediction(prediction, results = RESULTS) {
 
   if (realBoot[0] && predBoot[0] === realBoot[0])
     score += puntuaciones.premios.goldenBoot[0];
-  if (realBoot[1] && predBoot[1] === realBoot[1])
-    score += puntuaciones.premios.goldenBoot[1];
-  if (realBoot[2] && predBoot[2] === realBoot[2])
-    score += puntuaciones.premios.goldenBoot[2];
 
   const predBall = prediction.awards?.goldenBall || [];
   const realBall = results.awards?.goldenBall || [];
 
   if (realBall[0] && predBall[0] === realBall[0])
     score += puntuaciones.premios.goldenBall[0];
-  if (realBall[1] && predBall[1] === realBall[1])
-    score += puntuaciones.premios.goldenBall[1];
-  if (realBall[2] && predBall[2] === realBall[2])
-    score += puntuaciones.premios.goldenBall[2];
 
   return score;
 }
@@ -3688,29 +3670,9 @@ function renderReviewAwards(prediction) {
       RESULTS.awards?.goldenBoot?.[0],
     ],
     [
-      `Bota de plata (${puntuaciones.premios.goldenBoot[1]}pt)`,
-      prediction.awards?.goldenBoot?.[1],
-      RESULTS.awards?.goldenBoot?.[1],
-    ],
-    [
-      `Bota de bronce(${puntuaciones.premios.goldenBoot[2]}pt)`,
-      prediction.awards?.goldenBoot?.[2],
-      RESULTS.awards?.goldenBoot?.[2],
-    ],
-    [
       `Balón de oro (${puntuaciones.premios.goldenBall[0]}pt)`,
       prediction.awards?.goldenBall?.[0],
       RESULTS.awards?.goldenBall?.[0],
-    ],
-    [
-      `Balón de plata (${puntuaciones.premios.goldenBall[1]}pt)`,
-      prediction.awards?.goldenBall?.[1],
-      RESULTS.awards?.goldenBall?.[1],
-    ],
-    [
-      `Balón de bronce (${puntuaciones.premios.goldenBall[2]}pt)`,
-      prediction.awards?.goldenBall?.[2],
-      RESULTS.awards?.goldenBall?.[2],
     ],
   ];
 
@@ -3856,8 +3818,8 @@ function resetState() {
   state.knockout = {};
 
   state.awards = {
-    goldenBoot: ["", "", ""],
-    goldenBall: ["", "", ""],
+    goldenBoot: [""],
+    goldenBall: [""],
   };
 
   fillAwards(state.awards);
