@@ -4,6 +4,7 @@
   "description": "A football prediction app to have a good time with friends using technologies such as:",
   "main": "app.js",
   "scripts": {
+    "lint": "eslint app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,6 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "packageManager": "pnpm@11.1.1",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/dani73ag/worldcup2026/issues"
@@ -25,6 +27,7 @@
     "jscpd": "^4.2.3"
   },
   "devDependencies": {
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "http-server": "^14.1.1"
   }
 }

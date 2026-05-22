@@ -27,11 +27,17 @@ Leaderboard       ← fetch CSV, parse JSON per row, scorePrediction() vs RESULT
 ## Commands
 
 ```bash
+# Instalar dependencias
+pnpm install
+
 # Run scraper manually (uses Wikipedia API, needs cheerio)
 node scraper/scrape.js
 
 # Lint (ESLint with legacy config)
-npx eslint app.js
+pnpm eslint app.js
+
+# Update: update all dependencies
+pnpm update
 ```
 
 ## Scraper architecture
@@ -68,6 +74,7 @@ If scraping produces wrong scores, check that Wikipedia team names match what th
 
 - Double quotes (`"`) in JS, not single quotes — app.js uses this consistently
 - Module system: CommonJS (`require`), not ESM (`import`)
+- No uses npm para este proyecto, usa siempre pnpm.
 
 ## Secrets
 
