@@ -1,88 +1,259 @@
+// ⚠️ DEMO DATA — Se borrará automáticamente el día antes del Mundial (10 junio 2026)
+// Cuando el scraper empiece a funcionar, este archivo se reemplazará con resultados reales.
 const RESULTS = {
-  groups: {},
-  thirdPlace: [],
-  groupMatches: {},
+  groups: {
+    A: ["Mexico", "Scotland", "Sweden", "New Zealand"],
+    B: ["Senegal", "Canada", "Qatar", "Haiti"],
+    C: ["USA", "Japan", "Egypt", "Curaçao"],
+    D: ["Brazil", "Switzerland", "Iraq", "Cape Verde"],
+    E: ["Argentina", "Morocco", "Czech Republic", "Uzbekistan"],
+    F: ["France", "Uruguay", "South Korea", "Panama"],
+    G: ["Germany", "Portugal", "Tunisia", "Jordan"],
+    H: ["Spain", "Croatia", "Iran", "DR Congo"],
+    I: ["England", "Colombia", "Paraguay", "South Africa"],
+    J: ["Netherlands", "Belgium", "Austria", "Australia"],
+    K: ["Norway", "Ivory Coast", "Ecuador", "Algeria"],
+    L: ["Turkey", "Ghana", "Saudi Arabia", "Bosnia & Herzegovina"],
+  },
+
+  thirdPlace: [
+    "Sweden",
+    "Qatar",
+    "Egypt",
+    "Iraq",
+    "Czech Republic",
+    "South Korea",
+    "Austria",
+    "Ecuador",
+  ],
+
+  groupMatches: {
+    A: {
+      "Mexico__New Zealand": { home: 3, away: 0 },
+      "Mexico__Scotland": { home: 2, away: 1 },
+      "Mexico__Sweden": { home: 1, away: 1 },
+      "New Zealand__Scotland": { home: 0, away: 2 },
+      "New Zealand__Sweden": { home: 0, away: 3 },
+      "Scotland__Sweden": { home: 1, away: 0 },
+    },
+    B: {
+      "Canada__Haiti": { home: 2, away: 0 },
+      "Canada__Qatar": { home: 1, away: 1 },
+      "Canada__Senegal": { home: 1, away: 2 },
+      "Haiti__Senegal": { home: 0, away: 3 },
+      "Haiti__Qatar": { home: 0, away: 2 },
+      "Qatar__Senegal": { home: 0, away: 2 },
+    },
+    C: {
+      "Curaçao__USA": { home: 0, away: 4 },
+      "Curaçao__Japan": { home: 0, away: 2 },
+      "Egypt__USA": { home: 1, away: 2 },
+      "Curaçao__Egypt": { home: 1, away: 3 },
+      "Egypt__Japan": { home: 0, away: 3 },
+      "Japan__USA": { home: 1, away: 1 },
+    },
+    D: {
+      "Brazil__Cape Verde": { home: 5, away: 0 },
+      "Brazil__Iraq": { home: 3, away: 0 },
+      "Brazil__Switzerland": { home: 2, away: 0 },
+      "Cape Verde__Switzerland": { home: 0, away: 3 },
+      "Cape Verde__Iraq": { home: 1, away: 2 },
+      "Iraq__Switzerland": { home: 0, away: 1 },
+    },
+    E: {
+      "Argentina__Morocco": { home: 2, away: 0 },
+      "Argentina__Czech Republic": { home: 3, away: 0 },
+      "Argentina__Uzbekistan": { home: 4, away: 0 },
+      "Czech Republic__Morocco": { home: 0, away: 1 },
+      "Czech Republic__Uzbekistan": { home: 2, away: 1 },
+      "Morocco__Uzbekistan": { home: 2, away: 0 },
+    },
+    F: {
+      "France__Panama": { home: 3, away: 0 },
+      "France__South Korea": { home: 2, away: 1 },
+      "France__Uruguay": { home: 1, away: 0 },
+      "Panama__Uruguay": { home: 0, away: 2 },
+      "Panama__South Korea": { home: 0, away: 2 },
+      "South Korea__Uruguay": { home: 1, away: 1 },
+    },
+    G: {
+      "Germany__Jordan": { home: 4, away: 0 },
+      "Germany__Portugal": { home: 1, away: 1 },
+      "Germany__Tunisia": { home: 2, away: 0 },
+      "Jordan__Tunisia": { home: 0, away: 2 },
+      "Jordan__Portugal": { home: 0, away: 3 },
+      "Portugal__Tunisia": { home: 2, away: 1 },
+    },
+    H: {
+      "Croatia__Spain": { home: 0, away: 3 },
+      "Croatia__Iran": { home: 1, away: 1 },
+      "DR Congo__Spain": { home: 0, away: 4 },
+      "Croatia__DR Congo": { home: 2, away: 0 },
+      "DR Congo__Iran": { home: 0, away: 2 },
+      "Iran__Spain": { home: 0, away: 2 },
+    },
+    I: {
+      "Colombia__England": { home: 0, away: 1 },
+      "Colombia__Paraguay": { home: 2, away: 0 },
+      "Colombia__South Africa": { home: 3, away: 1 },
+      "England__Paraguay": { home: 2, away: 0 },
+      "England__South Africa": { home: 3, away: 0 },
+      "Paraguay__South Africa": { home: 1, away: 0 },
+    },
+    J: {
+      "Austria__Netherlands": { home: 0, away: 2 },
+      "Australia__Netherlands": { home: 0, away: 4 },
+      "Austria__Belgium": { home: 0, away: 1 },
+      "Australia__Austria": { home: 0, away: 2 },
+      "Australia__Belgium": { home: 0, away: 3 },
+      "Belgium__Netherlands": { home: 1, away: 2 },
+    },
+    K: {
+      "Algeria__Norway": { home: 0, away: 3 },
+      "Algeria__Ivory Coast": { home: 0, away: 2 },
+      "Ecuador__Norway": { home: 0, away: 1 },
+      "Algeria__Ecuador": { home: 0, away: 2 },
+      "Ecuador__Ivory Coast": { home: 1, away: 1 },
+      "Ivory Coast__Norway": { home: 0, away: 2 },
+    },
+    L: {
+      "Bosnia & Herzegovina__Turkey": { home: 0, away: 3 },
+      "Bosnia & Herzegovina__Saudi Arabia": { home: 1, away: 1 },
+      "Ghana__Turkey": { home: 1, away: 2 },
+      "Bosnia & Herzegovina__Ghana": { home: 0, away: 2 },
+      "Ghana__Saudi Arabia": { home: 1, away: 1 },
+      "Saudi Arabia__Turkey": { home: 0, away: 2 },
+    },
+  },
 
   knockout: {
-    round32: [],
-    round16: [],
-    quarterfinals: [],
-    semifinals: [],
+    round32: [
+      "Mexico", "Scotland", "Senegal", "Canada",
+      "USA", "Japan", "Brazil", "Switzerland",
+      "Argentina", "Morocco", "France", "Uruguay",
+      "Germany", "Portugal", "Spain", "Croatia",
+      "England", "Colombia", "Netherlands", "Belgium",
+      "Norway", "Ivory Coast", "Turkey", "Ghana",
+      "Sweden", "South Korea", "Austria", "Ecuador",
+      "Czech Republic", "Iraq", "Egypt", "Qatar",
+    ],
 
-    champion: "",
-    runnerUp: "",
-    finalists: [],
+    round16: [
+      "Mexico", "Brazil", "Argentina", "France",
+      "Germany", "Spain", "England", "Netherlands",
+      "Senegal", "Uruguay", "Portugal", "Croatia",
+      "Norway", "Colombia", "Belgium", "Turkey",
+    ],
 
-    thirdPlaceWinner: "",
-    final: "",
-    thirdPlace: "",
+    quarterfinals: [
+      "Brazil", "Argentina", "France", "Spain",
+      "Mexico", "Portugal", "England", "Norway",
+    ],
+
+    semifinals: [
+      "Argentina", "France", "Brazil", "Spain",
+    ],
+
+    champion: "Argentina",
+    runnerUp: "France",
+    finalists: ["Argentina", "France"],
+
+    thirdPlaceWinner: "Spain",
+    final: "Argentina",
+    thirdPlace: "Spain",
 
     matches: {
       round32: [
-        // {
-        //   match: 73,
-        //   team1: "",
-        //   team2: "",
-        //   winner: ""
-        // }
+        { match: 73, team1: "Mexico", team2: "Qatar", winner: "Mexico" },
+        { match: 74, team1: "Scotland", team2: "Iraq", winner: "Scotland" },
+        { match: 75, team1: "Senegal", team2: "Czech Republic", winner: "Senegal" },
+        { match: 76, team1: "Canada", team2: "Egypt", winner: "Canada" },
+        { match: 77, team1: "USA", team2: "Sweden", winner: "USA" },
+        { match: 78, team1: "Japan", team2: "South Korea", winner: "Japan" },
+        { match: 79, team1: "Brazil", team2: "Austria", winner: "Brazil" },
+        { match: 80, team1: "Switzerland", team2: "Ecuador", winner: "Switzerland" },
+        { match: 81, team1: "Argentina", team2: "Cape Verde", winner: "Argentina" },
+        { match: 82, team1: "Morocco", team2: "South Africa", winner: "Morocco" },
+        { match: 83, team1: "France", team2: "Panama", winner: "France" },
+        { match: 84, team1: "Uruguay", team2: "Tunisia", winner: "Uruguay" },
+        { match: 85, team1: "Germany", team2: "Jordan", winner: "Germany" },
+        { match: 86, team1: "Portugal", team2: "Iran", winner: "Portugal" },
+        { match: 87, team1: "Spain", team2: "DR Congo", winner: "Spain" },
+        { match: 88, team1: "Croatia", team2: "Paraguay", winner: "Croatia" },
+        { match: 89, team1: "England", team2: "Uzbekistan", winner: "England" },
+        { match: 90, team1: "Colombia", team2: "Australia", winner: "Colombia" },
+        { match: 91, team1: "Netherlands", team2: "Haiti", winner: "Netherlands" },
+        { match: 92, team1: "Belgium", team2: "Algeria", winner: "Belgium" },
+        { match: 93, team1: "Norway", team2: "New Zealand", winner: "Norway" },
+        { match: 94, team1: "Ivory Coast", team2: "Curaçao", winner: "Ivory Coast" },
+        { match: 95, team1: "Turkey", team2: "Saudi Arabia", winner: "Turkey" },
+        { match: 96, team1: "Ghana", team2: "Bosnia & Herzegovina", winner: "Ghana" },
+        { match: 97, team1: "Egypt", team2: "Sweden", winner: "Egypt" },
+        { match: 98, team1: "Iraq", team2: "Czech Republic", winner: "Iraq" },
+        { match: 99, team1: "South Korea", team2: "Qatar", winner: "South Korea" },
+        { match: 100, team1: "Austria", team2: "Ecuador", winner: "Austria" },
+        { match: 101, team1: "Paraguay", team2: "Panama", winner: "Paraguay" },
+        { match: 102, team1: "Iran", team2: "Tunisia", winner: "Iran" },
+        { match: 103, team1: "Haiti", team2: "Curaçao", winner: "Haiti" },
+        { match: 104, team1: "Saudi Arabia", team2: "Bosnia & Herzegovina", winner: "Saudi Arabia" },
       ],
 
       round16: [
-        // {
-        //   match: 89,
-        //   team1: "",
-        //   team2: "",
-        //   winner: ""
-        // }
+        { match: 105, team1: "Mexico", team2: "Scotland", winner: "Mexico" },
+        { match: 106, team1: "Senegal", team2: "Canada", winner: "Senegal" },
+        { match: 107, team1: "USA", team2: "Japan", winner: "Japan" },
+        { match: 108, team1: "Brazil", team2: "Switzerland", winner: "Brazil" },
+        { match: 109, team1: "Argentina", team2: "Morocco", winner: "Argentina" },
+        { match: 110, team1: "France", team2: "Uruguay", winner: "France" },
+        { match: 111, team1: "Germany", team2: "Portugal", winner: "Germany" },
+        { match: 112, team1: "Spain", team2: "Croatia", winner: "Spain" },
+        { match: 113, team1: "England", team2: "Colombia", winner: "England" },
+        { match: 114, team1: "Netherlands", team2: "Belgium", winner: "Netherlands" },
+        { match: 115, team1: "Norway", team2: "Ivory Coast", winner: "Norway" },
+        { match: 116, team1: "Turkey", team2: "Ghana", winner: "Turkey" },
+        { match: 117, team1: "Sweden", team2: "South Korea", winner: "South Korea" },
+        { match: 118, team1: "Austria", team2: "Ecuador", winner: "Ecuador" },
+        { match: 119, team1: "Czech Republic", team2: "Iraq", winner: "Czech Republic" },
+        { match: 120, team1: "Egypt", team2: "Qatar", winner: "Egypt" },
       ],
 
       quarterfinals: [
-        // {
-        //   match: 97,
-        //   team1: "",
-        //   team2: "",
-        //   winner: ""
-        // }
+        { match: 121, team1: "Mexico", team2: "Brazil", winner: "Brazil" },
+        { match: 122, team1: "Senegal", team2: "Argentina", winner: "Argentina" },
+        { match: 123, team1: "Japan", team2: "France", winner: "France" },
+        { match: 124, team1: "Germany", team2: "Spain", winner: "Spain" },
+        { match: 125, team1: "England", team2: "Portugal", winner: "England" },
+        { match: 126, team1: "Netherlands", team2: "Norway", winner: "Norway" },
+        { match: 127, team1: "Uruguay", team2: "Colombia", winner: "Uruguay" },
+        { match: 128, team1: "Croatia", team2: "Belgium", winner: "Croatia" },
       ],
 
       semifinals: [
-        // {
-        //   match: 101,
-        //   team1: "",
-        //   team2: "",
-        //   winner: ""
-        // }
+        { match: 129, team1: "Brazil", team2: "Argentina", winner: "Argentina" },
+        { match: 130, team1: "France", team2: "Spain", winner: "France" },
+        { match: 131, team1: "England", team2: "Norway", winner: "England" },
+        { match: 132, team1: "Portugal", team2: "Croatia", winner: "Portugal" },
       ],
 
       thirdPlace: [
-        // {
-        //   match: 103,
-        //   team1: "",
-        //   team2: "",
-        //   winner: ""
-        // }
+        { match: 133, team1: "Brazil", team2: "Spain", winner: "Spain" },
       ],
 
       final: [
-        // {
-        //   match: 104,
-        //   team1: "",
-        //   team2: "",
-        //   winner: ""
-        // }
-      ]
-    }
+        { match: 134, team1: "Argentina", team2: "France", winner: "Argentina" },
+      ],
+    },
   },
 
-  semifinalists: [],
-  finalists: [],
+  semifinalists: ["Argentina", "France", "Brazil", "Spain"],
+  finalists: ["Argentina", "France"],
 
-  champion: "",
-  runnerUp: "",
-  thirdPlaceWinner: "",
+  champion: "Argentina",
+  runnerUp: "France",
+  thirdPlaceWinner: "Spain",
 
   awards: {
-    goldenBoot: [],
-    goldenBall: []
-  }
+    goldenBoot: ["Kylian Mbappé", "Vinícius Júnior", "Lionel Messi"],
+    goldenBall: ["Lionel Messi", "Jude Bellingham", "Lamine Yamal"],
+  },
 };

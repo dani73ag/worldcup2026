@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mundial FIFA 2026</title>
+    <title>Porra Mundial 2026</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css"
@@ -16,6 +16,24 @@
       <img src="mundial_logo.jpg" alt="Logo Mundial 2026" class="header-logo" />
       <h1>La porra del Mundial 2026</h1>
       <p class="subtitle">¿Cuál va a ser tu "ojito con..."?</p>
+      <div class="countdown-section">
+        <div class="countdown-box">
+          <span class="countdown-value" id="countdownDays">00</span>
+          <span class="countdown-label">DÍAS</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-value" id="countdownHours">00</span>
+          <span class="countdown-label">HORAS</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-value" id="countdownMinutes">00</span>
+          <span class="countdown-label">MINUTOS</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-value" id="countdownSeconds">00</span>
+          <span class="countdown-label">SEGUNDOS</span>
+        </div>
+      </div>
     </header>
 
     <nav class="tab-nav">
@@ -31,7 +49,7 @@
         <!-- Toolbar -->
         <div class="toolbar-btns">
           <button class="toolbar-btn" id="btnReset">
-            🗑️ Borrar todo (no hay vuelta atrás)
+            🗑️ Borrar predicción
           </button>
           <button class="toolbar-btn" id="btnScoringHelp">
             ❓ Cómo se puntúa

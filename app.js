@@ -6,7 +6,8 @@ const DATA_SRC =
   "https://raw.githubusercontent.com/openfootball/worldcup.json/refs/heads/master/2026";
 
 //mi google sheet
-const LEADERBOARD_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjp_h2I1C6_VVJH5azB0majnPJFpYPK8ITkR9PbKgHs6ZbySsbNBGX6wuninxIGKG2L1xe1JYEcPAP/pub?gid=211280431&single=true&output=csv"; 
+const LEADERBOARD_CSV_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSjp_h2I1C6_VVJH5azB0majnPJFpYPK8ITkR9PbKgHs6ZbySsbNBGX6wuninxIGKG2L1xe1JYEcPAP/pub?gid=211280431&single=true&output=csv";
 const FORM_ID = "1FAIpQLScCm4A0_nOpUMmZX4gOzn9n4CusiCPA6S-OgV9BYFlkqAmvQw"; //mi formulario
 const ENTRY_ID = "entry.1894069950"; //entry id del formulario
 
@@ -89,225 +90,92 @@ const FLAG_CODE = {
   Panama: "pa",
 };
 
+const TEAM_NAME_ES = {
+  Mexico: "México",
+  "South Africa": "Sudáfrica",
+  "South Korea": "Corea del Sur",
+  "Czech Republic": "Rep. Checa",
+  Canada: "Canadá",
+  "Bosnia & Herzegovina": "Bosnia",
+  Qatar: "Catar",
+  Switzerland: "Suiza",
+  Brazil: "Brasil",
+  Morocco: "Marruecos",
+  Haiti: "Haití",
+  Scotland: "Escocia",
+  USA: "EE. UU.",
+  Paraguay: "Paraguay",
+  Australia: "Australia",
+  Turkey: "Turquía",
+  Germany: "Alemania",
+  "Cura\u00e7ao": "Curasao",
+  "Ivory Coast": "Costa de Marfil",
+  Ecuador: "Ecuador",
+  Netherlands: "Países Bajos",
+  Japan: "Japón",
+  Sweden: "Suecia",
+  Tunisia: "Túnez",
+  Belgium: "Bélgica",
+  Egypt: "Egipto",
+  Iran: "Irán",
+  "New Zealand": "Nueva Zelanda",
+  Spain: "España",
+  "Cape Verde": "Cabo Verde",
+  "Saudi Arabia": "Arabia Saudí",
+  Uruguay: "Uruguay",
+  France: "Francia",
+  Senegal: "Senegal",
+  Iraq: "Irak",
+  Norway: "Noruega",
+  Argentina: "Argentina",
+  Algeria: "Argelia",
+  Austria: "Austria",
+  Jordan: "Jordania",
+  Portugal: "Portugal",
+  "DR Congo": "RD Congo",
+  Uzbekistan: "Uzbekistán",
+  Colombia: "Colombia",
+  England: "Inglaterra",
+  Croatia: "Croacia",
+  Ghana: "Ghana",
+  Panama: "Panamá",
+};
+
+function displayName(name) {
+  return TEAM_NAME_ES[name] || name;
+}
+
 const AWARD_PLAYERS = [
   // France
   { name: "Kylian Mbappé", country: "France" },
   { name: "Ousmane Dembélé", country: "France" },
-  { name: "Eduardo Camavinga", country: "France" },
-  { name: "Aurélien Tchouaméni", country: "France" },
-  { name: "William Saliba", country: "France" },
-  { name: "Ibrahima Konaté", country: "France" },
-  { name: "Theo Hernández", country: "France" },
-  { name: "Mike Maignan", country: "France" },
-  { name: "Marcus Thuram", country: "France" },
-  { name: "Michael Olise", country: "France" },
-  { name: "Désiré Doué", country: "France" },
-  { name: "Rayan Cherki", country: "France" },
-  { name: "Warren Zaïre-Emery", country: "France" },
-  { name: "Bradley Barcola", country: "France" },
-  { name: "Jean-Philippe Mateta", country: "France" },
 
   // England
-  { name: "Jude Bellingham", country: "England" },
   { name: "Harry Kane", country: "England" },
-  { name: "Phil Foden", country: "England" },
-  { name: "Bukayo Saka", country: "England" },
-  { name: "Cole Palmer", country: "England" },
-  { name: "Declan Rice", country: "England" },
-  { name: "Trent Alexander-Arnold", country: "England" },
-  { name: "John Stones", country: "England" },
-  { name: "Anthony Gordon", country: "England" },
-  { name: "Kobbie Mainoo", country: "England" },
-  { name: "Reece James", country: "England" },
   { name: "Ollie Watkins", country: "England" },
-  { name: "Eberechi Eze", country: "England" },
-  { name: "Morgan Gibbs-White", country: "England" },
-  { name: "Marc Guéhi", country: "England" },
 
   // Brazil
   { name: "Vinícius Júnior", country: "Brazil" },
-  { name: "Rodrygo", country: "Brazil" },
-  { name: "Raphinha", country: "Brazil" },
-  { name: "Endrick", country: "Brazil" },
   { name: "Neymar", country: "Brazil" },
-  { name: "Bruno Guimarães", country: "Brazil" },
-  { name: "Gabriel Martinelli", country: "Brazil" },
-  { name: "Marquinhos", country: "Brazil" },
-  { name: "Gabriel Magalhães", country: "Brazil" },
-  { name: "Alisson Becker", country: "Brazil" },
-  { name: "João Pedro", country: "Brazil" },
-  { name: "Savinho", country: "Brazil" },
-  { name: "André", country: "Brazil" },
-  { name: "Murillo", country: "Brazil" },
-  { name: "Beraldo", country: "Brazil" },
 
   // Spain
   { name: "Lamine Yamal", country: "Spain" },
-  { name: "Rodri", country: "Spain" },
-  { name: "Pedri", country: "Spain" },
   { name: "Nico Williams", country: "Spain" },
-  { name: "Dani Olmo", country: "Spain" },
-  { name: "Pau Cubarsí", country: "Spain" },
-  { name: "Dani Carvajal", country: "Spain" },
-  { name: "Álvaro Morata", country: "Spain" },
-  { name: "Gavi", country: "Spain" },
-  { name: "Mikel Merino", country: "Spain" },
-  { name: "Aleix García", country: "Spain" },
-  { name: "Fermín López", country: "Spain" },
-  { name: "Dean Huijsen", country: "Spain" },
-  { name: "Álex Baena", country: "Spain" },
-  { name: "Unai Simón", country: "Spain" },
 
   // Argentina
   { name: "Lionel Messi", country: "Argentina" },
-  { name: "Lautaro Martínez", country: "Argentina" },
   { name: "Julián Álvarez", country: "Argentina" },
-  { name: "Alexis Mac Allister", country: "Argentina" },
-  { name: "Enzo Fernández", country: "Argentina" },
-  { name: "Cristian Romero", country: "Argentina" },
-  { name: "Emiliano Martínez", country: "Argentina" },
-  { name: "Rodrigo De Paul", country: "Argentina" },
-  { name: "Nahuel Molina", country: "Argentina" },
-  { name: "Lisandro Martínez", country: "Argentina" },
-  { name: "Valentín Barco", country: "Argentina" },
-  { name: "Nicolás Paz", country: "Argentina" },
-  { name: "Giuliano Simeone", country: "Argentina" },
-  { name: "Exequiel Palacios", country: "Argentina" },
-  { name: "Thiago Almada", country: "Argentina" },
 
   // Germany
   { name: "Florian Wirtz", country: "Germany" },
   { name: "Jamal Musiala", country: "Germany" },
-  { name: "Kai Havertz", country: "Germany" },
-  { name: "Joshua Kimmich", country: "Germany" },
-  { name: "Antonio Rüdiger", country: "Germany" },
-  { name: "Marc-André ter Stegen", country: "Germany" },
-  { name: "Leroy Sané", country: "Germany" },
-  { name: "Nico Schlotterbeck", country: "Germany" },
-  { name: "Aleksandar Pavlović", country: "Germany" },
-  { name: "Deniz Undav", country: "Germany" },
-  { name: "Benjamin Henrichs", country: "Germany" },
-  { name: "Chris Führich", country: "Germany" },
-  { name: "Maximilian Beier", country: "Germany" },
 
   // Portugal
   { name: "Cristiano Ronaldo", country: "Portugal" },
   { name: "Bernardo Silva", country: "Portugal" },
-  { name: "Bruno Fernandes", country: "Portugal" },
-  { name: "Rafael Leão", country: "Portugal" },
-  { name: "Rúben Dias", country: "Portugal" },
-  { name: "Nuno Mendes", country: "Portugal" },
-  { name: "Diogo Costa", country: "Portugal" },
-  { name: "João Neves", country: "Portugal" },
-  { name: "Vitinha", country: "Portugal" },
-  { name: "Gonçalo Ramos", country: "Portugal" },
-  { name: "Pedro Neto", country: "Portugal" },
-  { name: "João Félix", country: "Portugal" },
-  { name: "António Silva", country: "Portugal" },
-  { name: "Francisco Conceição", country: "Portugal" },
-
-  // Netherlands
-  { name: "Xavi Simons", country: "Netherlands" },
-  { name: "Cody Gakpo", country: "Netherlands" },
-  { name: "Virgil van Dijk", country: "Netherlands" },
-  { name: "Frenkie de Jong", country: "Netherlands" },
-  { name: "Ryan Gravenberch", country: "Netherlands" },
-  { name: "Jeremie Frimpong", country: "Netherlands" },
-  { name: "Micky van de Ven", country: "Netherlands" },
-  { name: "Tijjani Reijnders", country: "Netherlands" },
-  { name: "Jorrel Hato", country: "Netherlands" },
-
-  // Belgium
-  { name: "Kevin De Bruyne", country: "Belgium" },
-  { name: "Jérémy Doku", country: "Belgium" },
-  { name: "Romelu Lukaku", country: "Belgium" },
-  { name: "Thibaut Courtois", country: "Belgium" },
-  { name: "Loïs Openda", country: "Belgium" },
-
-  // Uruguay
-  { name: "Fede Valverde", country: "Uruguay" },
-  { name: "Darwin Núñez", country: "Uruguay" },
-  { name: "Ronald Araújo", country: "Uruguay" },
-  { name: "Manuel Ugarte", country: "Uruguay" },
-  { name: "José María Giménez", country: "Uruguay" },
-
-  // Croatia
-  { name: "Luka Modrić", country: "Croatia" },
-  { name: "Joško Gvardiol", country: "Croatia" },
-
-  // Mexico
-  { name: "Santiago Giménez", country: "Mexico" },
-  { name: "Edson Álvarez", country: "Mexico" },
-
-  // Colombia
-  { name: "Luis Díaz", country: "Colombia" },
-  { name: "James Rodríguez", country: "Colombia" },
-
-  // USA
-  { name: "Christian Pulisic", country: "USA" },
-  { name: "Weston McKennie", country: "USA" },
-  { name: "Giovanni Reyna", country: "USA" },
-  { name: "Tim Weah", country: "USA" },
-
-  // South Korea
-  { name: "Son Heung-min", country: "South Korea" },
-  { name: "Kim Min-jae", country: "South Korea" },
 
   // Norway
   { name: "Erling Haaland", country: "Norway" },
-  { name: "Martin Ødegaard", country: "Norway" },
-
-  // Sweden
-  { name: "Alexander Isak", country: "Sweden" },
-  { name: "Viktor Gyökeres", country: "Sweden" },
-
-  // Morocco
-  { name: "Achraf Hakimi", country: "Morocco" },
-  { name: "Yassine Bounou", country: "Morocco" },
-
-  // Japan
-  { name: "Takefusa Kubo", country: "Japan" },
-  { name: "Kaoru Mitoma", country: "Japan" },
-
-  // Turkey
-  { name: "Arda Güler", country: "Turkey" },
-  { name: "Hakan Çalhanoğlu", country: "Turkey" },
-
-  // Hungary
-  { name: "Dominik Szoboszlai", country: "Hungary" },
-
-  // Canada
-  { name: "Alphonso Davies", country: "Canada" },
-  { name: "Jonathan David", country: "Canada" },
-
-  // Senegal
-  { name: "Sadio Mané", country: "Senegal" },
-  { name: "Kalidou Koulibaly", country: "Senegal" },
-
-  // Ivory Coast
-  { name: "Sébastien Haller", country: "Ivory Coast" },
-  { name: "Franck Kessié", country: "Ivory Coast" },
-
-  // Egypt
-  { name: "Mohamed Salah", country: "Egypt" },
-
-  // Ecuador
-  { name: "Moisés Caicedo", country: "Ecuador" },
-
-  // Paraguay
-  { name: "Miguel Almirón", country: "Paraguay" },
-
-  // Switzerland
-  { name: "Granit Xhaka", country: "Switzerland" },
-
-  // Austria
-  { name: "David Alaba", country: "Austria" },
-
-  // Australia
-  { name: "Harry Souttar", country: "Australia" },
-
-  // Iran
-  { name: "Mehdi Taremi", country: "Iran" },
 ];
 
 function getFlagClass(team) {
@@ -541,11 +409,6 @@ function restoreLocalPrediction() {
     clearLocalPrediction();
     return false;
   }
-}
-
-function closeAwardDropdowns() {
-  // Legacy no-op kept because older dropdown code called this from global listeners.
-  // Awards now use the popup picker.
 }
 
 // ---- Fetch & Parse ----
@@ -848,11 +711,6 @@ function formatMatchDate(match) {
     .toUpperCase();
 }
 
-function getMatchdayNumber(match, fallback) {
-  const found = String(match.round || "").match(/\d+/);
-  return found ? found[0] : String(fallback + 1);
-}
-
 function ensureAllGroupMatches() {
   if (!state.groupMatches) state.groupMatches = {};
 
@@ -1073,14 +931,14 @@ function openGroupResultsModal(group) {
     box.className = "group-modal-team-card";
     box.innerHTML = `
       <span class="team-flag ${getTeamFlagClass(team)}"></span>
-      <span>${team}</span>
+      <span>${displayName(team)}</span>
     `;
     teamGrid.appendChild(box);
   });
 
   const list = viewer.querySelector(".group-match-list");
 
-  matches.forEach((match, index) => {
+  matches.forEach((match) => {
     const result = state.groupMatches[group][match.key] || {
       home: null,
       away: null,
@@ -1088,22 +946,24 @@ function openGroupResultsModal(group) {
     const row = document.createElement("div");
     row.className = "group-match-row";
     row.innerHTML = `
-      <div class="match-date-badge">
-        <strong>${getMatchdayNumber(match, index)}</strong>
-        <span>${formatMatchDate(match)}</span>
+      <div class="match-info-row">
+        <span class="match-date">${formatMatchDate(match)}</span>
+        <span class="match-stadium">${match.ground || "—"}</span>
       </div>
-      <div class="match-team match-team-left">
-        <span class="team-flag ${getTeamFlagClass(match.team1)}"></span>
-        <span>${match.team1}</span>
-      </div>
-      <div class="match-score-controls">
-        <input class="score-input" type="number" min="0" max="99" inputmode="numeric" data-key="${match.key}" data-side="home" value="${result.home ?? 0}">
-        <span class="score-separator">-</span>
-        <input class="score-input" type="number" min="0" max="99" inputmode="numeric" data-key="${match.key}" data-side="away" value="${result.away ?? 0}">
-      </div>
-      <div class="match-team match-team-right">
-        <span>${match.team2}</span>
-        <span class="team-flag ${getTeamFlagClass(match.team2)}"></span>
+      <div class="match-main-row">
+        <div class="match-team match-team-left">
+          <span class="team-flag ${getTeamFlagClass(match.team1)}"></span>
+          <span>${displayName(match.team1)}</span>
+        </div>
+        <div class="match-score-controls">
+          <input class="score-input" type="number" min="0" max="99" inputmode="numeric" data-key="${match.key}" data-side="home" value="${result.home ?? 0}">
+          <span class="score-separator">-</span>
+          <input class="score-input" type="number" min="0" max="99" inputmode="numeric" data-key="${match.key}" data-side="away" value="${result.away ?? 0}">
+        </div>
+        <div class="match-team match-team-right">
+          <span>${displayName(match.team2)}</span>
+          <span class="team-flag ${getTeamFlagClass(match.team2)}"></span>
+        </div>
       </div>
     `;
     list.appendChild(row);
@@ -1132,7 +992,7 @@ function openGroupResultsModal(group) {
       item.innerHTML = `
         <span class="position-badge">${idx + 1}</span>
         <span class="team-flag ${getTeamFlagClass(row.team)}"></span>
-        <span class="team-name">${row.team}</span>
+        <span class="team-name">${displayName(row.team)}</span>
         <span class="standings-mini">${row.pts} pts · ${row.gf}-${row.ga}</span>
       `;
       standingsDiv.appendChild(item);
@@ -1327,7 +1187,7 @@ function renderGroups() {
       originalTeams.forEach((team) => {
         const flagBox = document.createElement("span");
         flagBox.className = "group-empty-flag-box";
-        flagBox.title = team;
+        flagBox.title = displayName(team);
         flagBox.innerHTML =
           '<span class="team-flag ' + getTeamFlagClass(team) + '"></span>';
         flags.appendChild(flagBox);
@@ -1350,18 +1210,13 @@ function renderGroups() {
           (eliminated ? " eliminated" : "") +
           (isThird && autoThirds.has(team) ? " qualified-third" : "");
 
-        const badge = document.createElement("span");
-        badge.className = "position-badge";
-        badge.textContent = idx + 1;
-        row.appendChild(badge);
-
         const flag = document.createElement("span");
         flag.className = "team-flag " + getTeamFlagClass(team);
         row.appendChild(flag);
 
         const name = document.createElement("span");
-        name.className = "team-name";
-        name.textContent = team;
+        name.className = "group-card-team-name";
+        name.textContent = displayName(team);
         row.appendChild(name);
 
         const points = document.createElement("span");
@@ -1408,7 +1263,7 @@ function renderThirdPlace() {
       '<span class="' +
       getTeamFlagClass(team) +
       '"></span> ' +
-      team;
+      displayName(team);
     container.appendChild(tag);
   });
 }
@@ -1510,7 +1365,7 @@ function renderBracket() {
     team1: thirdMt.team1,
     team2: thirdMt.team2,
     winner: state.knockoutResults[thirdNum] || null,
-    num: thirdNum
+    num: thirdNum,
   };
 
   const r32Tops = r32.map((_, i) => LABEL_H + i * STEP);
@@ -1630,7 +1485,7 @@ function renderBracket() {
   function connectSemisToThirdPlace() {
     if (sfTops.length !== 2 || !thirdMatchDef) return;
 
-    const x = cols[3] + (COL_W / 2) - 3;
+    const x = cols[3] + COL_W / 2 - 3;
     const upperBottom = sfTops[0] + MATCH_H;
     const lowerTop = sfTops[1];
     const thirdTopEdge = thirdTop - 6;
@@ -1638,13 +1493,13 @@ function renderBracket() {
 
     if (upperBottom < thirdTopEdge) {
       const p1 = mkPath(`M${x},${upperBottom} L${x},${thirdTopEdge}`);
-      p1.setAttribute('stroke-width', '2');
+      p1.setAttribute("stroke-width", "2");
       svg.appendChild(p1);
     }
 
     if (thirdBottomEdge < lowerTop) {
       const p2 = mkPath(`M${x},${thirdBottomEdge} L${x},${lowerTop}`);
-      p2.setAttribute('stroke-width', '2');
+      p2.setAttribute("stroke-width", "2");
       svg.appendChild(p2);
     }
   }
@@ -1680,7 +1535,7 @@ function renderBracket() {
       getFlagClass(team) +
       '"></span>' +
       '<span class="slot-name">' +
-      (team || "---") +
+      (displayName(team) || "---") +
       "</span>" +
       '<button class="slot-clear">×</button>';
 
@@ -1756,35 +1611,45 @@ function renderBracket() {
   drawRound(sf, sfTops, 3);
 
   if (thirdMatchDef) {
-    const thirdLabel = document.createElement('div');
-    thirdLabel.className = 'bracket-round-label';
+    const thirdLabel = document.createElement("div");
+    thirdLabel.className = "bracket-round-label";
     thirdLabel.style.cssText =
-      'position:absolute;top:' + Math.max(LABEL_H, thirdTop - 26) + 'px;left:' + cols[3] + 'px;width:' + COL_W + 'px;text-align:center;color:#2E7D32;z-index:3;';
-    thirdLabel.textContent = '3er puesto';
+      "position:absolute;top:" +
+      Math.max(LABEL_H, thirdTop - 26) +
+      "px;left:" +
+      cols[3] +
+      "px;width:" +
+      COL_W +
+      "px;text-align:center;color:#2E7D32;z-index:3;";
+    thirdLabel.textContent = "3er puesto";
     wrapper.appendChild(thirdLabel);
 
     const thirdWinner = thirdMatch.winner || null;
     wrapper.appendChild(
       slotDiv(
         thirdMatch.team1,
-        Boolean(thirdMatch.team1 && thirdWinner && thirdMatch.team1 === thirdWinner),
+        Boolean(
+          thirdMatch.team1 && thirdWinner && thirdMatch.team1 === thirdWinner,
+        ),
         thirdNum,
         1,
         thirdTop,
         cols[3],
-        'third-place-slot'
-      )
+        "third-place-slot",
+      ),
     );
     wrapper.appendChild(
       slotDiv(
         thirdMatch.team2,
-        Boolean(thirdMatch.team2 && thirdWinner && thirdMatch.team2 === thirdWinner),
+        Boolean(
+          thirdMatch.team2 && thirdWinner && thirdMatch.team2 === thirdWinner,
+        ),
         thirdNum,
         2,
         thirdTop + SLOT_H,
         cols[3],
-        'third-place-slot'
-      )
+        "third-place-slot",
+      ),
     );
   }
 
@@ -1894,10 +1759,7 @@ function clearKnockoutAndRender(team) {
 }
 
 // ---- Awards ----
-const AWARD_SELECT_IDS = [
-  "awardGb1",
-  "awardBa1",
-];
+const AWARD_SELECT_IDS = ["awardGb1", "awardBa1"];
 
 function getPlayerByName(name) {
   return AWARD_PLAYERS.find((p) => p.name === name) || null;
@@ -1910,7 +1772,7 @@ function awardDisplayHtml(value) {
   return `
     <span class="team-flag ${getFlagClass(player.country)}"></span>
     <span class="award-player-name">${escapeHtml(player.name)}</span>
-    <span class="award-player-country">${escapeHtml(player.country)}</span>
+    <span class="award-player-country">${escapeHtml(displayName(player.country))}</span>
   `;
 }
 
@@ -1983,7 +1845,7 @@ function openAwardPickerModal(select) {
     option.innerHTML = `
       <span class="team-flag ${getFlagClass(player.country)}"></span>
       <span class="award-player-name">${escapeHtml(player.name)}</span>
-      <span class="award-player-country">${escapeHtml(player.country)}</span>
+      <span class="award-player-country">${escapeHtml(displayName(player.country))}</span>
     `;
     list.appendChild(option);
   });
@@ -2044,7 +1906,7 @@ function renderAwardSelects() {
     AWARD_PLAYERS.forEach((player) => {
       const option = document.createElement("option");
       option.value = player.name;
-      option.textContent = `${player.name} — ${player.country}`;
+      option.textContent = `${player.name} — ${displayName(player.country)}`;
       select.appendChild(option);
     });
 
@@ -2067,12 +1929,8 @@ function syncAwardCustomSelects() {
 
 function readAwards() {
   return {
-    goldenBoot: [
-      document.getElementById("awardGb1")?.value || "",
-    ],
-    goldenBall: [
-      document.getElementById("awardBa1")?.value || "",
-    ],
+    goldenBoot: [document.getElementById("awardGb1")?.value || ""],
+    goldenBall: [document.getElementById("awardBa1")?.value || ""],
   };
 }
 
@@ -2811,7 +2669,7 @@ function renderStandingRow({
     <div class="group-team pos-${idx + 1}${extraClass}${statusClass || ""}">
       <span class="position-badge">${idx + 1}</span>
       <span class="team-flag ${getTeamFlagClass(team)}"></span>
-      <span class="team-name">${escapeHtml(team)}</span>
+      <span class="team-name">${escapeHtml(displayName(team))}</span>
       <span class="standings-mini">${pts} pts · ${gf}-${ga}</span>
     </div>
   `;
@@ -2877,7 +2735,7 @@ function renderReviewGroups(prediction, entry) {
         const team = teamObj.name;
         const flagBox = document.createElement("span");
         flagBox.className = "group-empty-flag-box";
-        flagBox.title = team;
+        flagBox.title = displayName(team);
         flagBox.innerHTML =
           '<span class="team-flag ' + getTeamFlagClass(team) + '"></span>';
         flags.appendChild(flagBox);
@@ -2918,7 +2776,7 @@ function renderReviewGroups(prediction, entry) {
         row.innerHTML = `
           <span class="position-badge">${idx + 1}</span>
           <span class="team-flag ${getTeamFlagClass(team)}"></span>
-          <span class="team-name">${escapeHtml(team)}</span>
+          <span class="team-name">${escapeHtml(displayName(team))}</span>
           <span class="group-total-points">${stat.pts} pts</span>
         `;
 
@@ -2983,13 +2841,13 @@ function openReadOnlyGroupResultsModal(entry, group) {
     box.className = "group-modal-team-card";
     box.innerHTML = `
       <span class="team-flag ${getTeamFlagClass(team)}"></span>
-      <span>${escapeHtml(team)}</span>
+      <span>${escapeHtml(displayName(team))}</span>
     `;
     teamGrid.appendChild(box);
   });
 
   const list = viewer.querySelector(".group-match-list");
-  matches.forEach((match, index) => {
+  matches.forEach((match) => {
     const pred = getMatchResultFromMap(predMatches, match);
     const real = getMatchResultFromMap(realMatches, match);
     const ph = parseGoalValue(pred.home);
@@ -3014,22 +2872,24 @@ function openReadOnlyGroupResultsModal(entry, group) {
       (!resolved ? " review-pending" : "");
 
     row.innerHTML = `
-      <div class="match-date-badge">
-        <strong>${getMatchdayNumber(match, index)}</strong>
-        <span>${formatMatchDate(match)}</span>
+      <div class="match-info-row">
+        <span class="match-date">${formatMatchDate(match)}</span>
+        <span class="match-stadium">${match.ground || "—"}</span>
       </div>
-      <div class="match-team match-team-left">
-        <span class="team-flag ${getTeamFlagClass(match.team1)}"></span>
-        <span>${escapeHtml(match.team1)}</span>
-      </div>
-      <div class="match-score-controls readonly-score-controls">
-        <span class="readonly-score-box">${ph ?? 0}</span>
-        <span class="score-separator">-</span>
-        <span class="readonly-score-box">${pa ?? 0}</span>
-      </div>
-      <div class="match-team match-team-right">
-        <span>${escapeHtml(match.team2)}</span>
-        <span class="team-flag ${getTeamFlagClass(match.team2)}"></span>
+      <div class="match-main-row">
+        <div class="match-team match-team-left">
+          <span class="team-flag ${getTeamFlagClass(match.team1)}"></span>
+          <span>${escapeHtml(displayName(match.team1))}</span>
+        </div>
+        <div class="match-score-controls readonly-score-controls">
+          <span class="readonly-score-box">${ph ?? 0}</span>
+          <span class="score-separator">-</span>
+          <span class="readonly-score-box">${pa ?? 0}</span>
+        </div>
+        <div class="match-team match-team-right">
+          <span>${escapeHtml(displayName(match.team2))}</span>
+          <span class="team-flag ${getTeamFlagClass(match.team2)}"></span>
+        </div>
       </div>
       <div class="review-match-points-box" title="Puntos de este partido">+${matchPoints}pt</div>
       ${resolved ? `<div class="review-real-score">Real: ${rh}-${ra}</div>` : ""}
@@ -3282,7 +3142,7 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
     team1: thirdMt.team1,
     team2: thirdMt.team2,
     winner: reviewState.knockoutResults[thirdNum] || null,
-    num: thirdNum
+    num: thirdNum,
   };
 
   const r32Tops = r32.map((_, i) => TITLE_H + LABEL_H + i * STEP);
@@ -3407,7 +3267,7 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
   function connectSemisToThirdPlace() {
     if (sfTops.length !== 2 || !thirdMatchDef) return;
 
-    const x = cols[3] + (COL_W / 2) - 3;
+    const x = cols[3] + COL_W / 2 - 3;
     const upperBottom = sfTops[0] + MATCH_H;
     const lowerTop = sfTops[1];
     const thirdTopEdge = thirdTop - 6;
@@ -3415,13 +3275,13 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
 
     if (upperBottom < thirdTopEdge) {
       const p1 = mkPath(`M${x},${upperBottom} L${x},${thirdTopEdge}`);
-      p1.setAttribute('stroke-width', '2');
+      p1.setAttribute("stroke-width", "2");
       svg.appendChild(p1);
     }
 
     if (thirdBottomEdge < lowerTop) {
       const p2 = mkPath(`M${x},${thirdBottomEdge} L${x},${lowerTop}`);
-      p2.setAttribute('stroke-width', '2');
+      p2.setAttribute("stroke-width", "2");
       svg.appendChild(p2);
     }
   }
@@ -3474,7 +3334,7 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
       getFlagClass(team) +
       '"></span>' +
       '<span class="slot-name">' +
-      escapeHtml(team || "---") +
+      escapeHtml(displayName(team) || "---") +
       "</span>" +
       (isClickable
         ? '<span class="review-match-info-dot" title="Ver partido real">i</span>'
@@ -3515,16 +3375,58 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
     const thirdLabel = document.createElement("div");
     thirdLabel.className = "bracket-round-label";
     thirdLabel.style.cssText =
-      "position:absolute;top:" + Math.max(TITLE_H + LABEL_H, thirdTop - 26) + "px;left:" + cols[3] + "px;width:" + COL_W + "px;text-align:center;color:#2E7D32;z-index:3;";
+      "position:absolute;top:" +
+      Math.max(TITLE_H + LABEL_H, thirdTop - 26) +
+      "px;left:" +
+      cols[3] +
+      "px;width:" +
+      COL_W +
+      "px;text-align:center;color:#2E7D32;z-index:3;";
     thirdLabel.textContent = "3er puesto";
     wrapper.appendChild(thirdLabel);
 
-    wrapper.appendChild(slotDiv(thirdMatch.team1, thirdMatch.winner, thirdTop, cols[3], thirdMatch.num, "thirdPlace"));
-    wrapper.appendChild(slotDiv(thirdMatch.team2, thirdMatch.winner, thirdTop + SLOT_H, cols[3], thirdMatch.num, "thirdPlace"));
+    wrapper.appendChild(
+      slotDiv(
+        thirdMatch.team1,
+        thirdMatch.winner,
+        thirdTop,
+        cols[3],
+        thirdMatch.num,
+        "thirdPlace",
+      ),
+    );
+    wrapper.appendChild(
+      slotDiv(
+        thirdMatch.team2,
+        thirdMatch.winner,
+        thirdTop + SLOT_H,
+        cols[3],
+        thirdMatch.num,
+        "thirdPlace",
+      ),
+    );
   }
 
-  wrapper.appendChild(slotDiv(finalMatch.team1, finalMatch.winner, finalTop, cols[4], finalMatch.num, "final"));
-  wrapper.appendChild(slotDiv(finalMatch.team2, finalMatch.winner, finalTop + SLOT_H, cols[4], finalMatch.num, "final"));
+  wrapper.appendChild(
+    slotDiv(
+      finalMatch.team1,
+      finalMatch.winner,
+      finalTop,
+      cols[4],
+      finalMatch.num,
+      "final",
+    ),
+  );
+  wrapper.appendChild(
+    slotDiv(
+      finalMatch.team2,
+      finalMatch.winner,
+      finalTop + SLOT_H,
+      cols[4],
+      finalMatch.num,
+      "final",
+    ),
+  );
 
   return wrapper;
 }
@@ -3567,7 +3469,7 @@ function renderReviewKnockout(prediction) {
     return `
       <div class="knockout-popover-team ${isWinner ? "winner" : ""}">
         <span class="slot-flag ${getFlagClass(team)}"></span>
-        <span>${escapeHtml(team || "---")}</span>
+        <span>${escapeHtml(displayName(team) || "---")}</span>
       </div>
     `;
   }
@@ -3590,7 +3492,7 @@ function renderReviewKnockout(prediction) {
       <div class="knockout-popover-title">Partido #${escapeHtml(matchNum)}</div>
       <div class="knockout-popover-grid">
         <div class="knockout-popover-card expected">
-          <div class="knockout-popover-label">Partido esperado</div>
+          <div class="knockout-popover-label">Partido predecido</div>
           ${teamMini(expected.team1, expectedWinner)}
           ${teamMini(expected.team2, expectedWinner)}
         </div>
@@ -3723,7 +3625,7 @@ function renderLeaderboard(entries) {
   entries.forEach((e, idx) => {
     const tr = document.createElement("tr");
     if (idx === 0) tr.className = "rank-1";
-    tr.innerHTML = `<td>${idx === 0 ? '<span class="rank-crown">👑</span> ' : ""}${idx + 1}</td><td>${e.name}</td><td>${e.score}</td><td>${e.champion || "--"}</td>`;
+    tr.innerHTML = `<td>${idx === 0 ? '<span class="rank-crown">👑</span> ' : ""}${idx + 1}</td><td>${e.name}</td><td>${e.score}</td><td>${e.champion ? displayName(e.champion) : "--"}</td>`;
     tbody.appendChild(tr);
   });
 
@@ -3916,9 +3818,47 @@ async function init() {
       el.addEventListener("change", saveLocalPredictionSoon);
     });
 
+  initCountdown();
+
   if (window.location.hash === "#leaderboard") {
     document.querySelector('[data-tab="leaderboard"]').click();
   }
+}
+
+function initCountdown() {
+  var target = new Date(2026, 5, 11);
+
+  function tick() {
+    var diff = target.getTime() - Date.now();
+    if (diff <= 0) {
+      document.getElementById("countdownDays").textContent = "00";
+      document.getElementById("countdownHours").textContent = "00";
+      document.getElementById("countdownMinutes").textContent = "00";
+      document.getElementById("countdownSeconds").textContent = "00";
+      return;
+    }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    document.getElementById("countdownDays").textContent = String(d).padStart(
+      2,
+      "0",
+    );
+    document.getElementById("countdownHours").textContent = String(h).padStart(
+      2,
+      "0",
+    );
+    document.getElementById("countdownMinutes").textContent = String(
+      m,
+    ).padStart(2, "0");
+    document.getElementById("countdownSeconds").textContent = String(
+      s,
+    ).padStart(2, "0");
+  }
+
+  tick();
+  setInterval(tick, 1000);
 }
 
 document.addEventListener("DOMContentLoaded", init);
