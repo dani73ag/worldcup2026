@@ -318,6 +318,8 @@ let state = {
 const LOCAL_STORAGE_VERSION = "5";
 const LOCAL_STORAGE_VERSION_KEY = "wc2026_version";
 const LOCAL_STORAGE_PICKS_KEY = "wc2026_picks";
+const LOCAL_STORAGE_SUBMITTED_KEY = "wc2026_submitted";
+const LOCAL_STORAGE_CLIENT_ID_KEY = "wc2026_clientId";
 let localSaveTimer = null;
 
 function normalizeLoadedState() {
@@ -346,9 +348,59 @@ function clearLocalPrediction() {
   clearTimeout(localSaveTimer);
   try {
     localStorage.removeItem(LOCAL_STORAGE_PICKS_KEY);
+    localStorage.removeItem(LOCAL_STORAGE_SUBMITTED_KEY);
   } catch (e) {
     /* ignore */
   }
+}
+
+function getClientId() {
+  var clientId = localStorage.getItem(LOCAL_STORAGE_CLIENT_ID_KEY);
+  if (!clientId) {
+    clientId = crypto.randomUUID();
+    localStorage.setItem(LOCAL_STORAGE_CLIENT_ID_KEY, clientId);
+  }
+  return clientId;
+}
+
+function getDeterministicPayload(payload) {
+  var metadataKeys = ["name", "_submittedAt", "_clientId", "_localDraftSavedAt"];
+  var clone = {};
+  Object.keys(payload).forEach(function (k) {
+    if (metadataKeys.indexOf(k) === -1) {
+      clone[k] = payload[k];
+    }
+  });
+  return JSON.stringify(clone);
+}
+
+function isDuplicateSubmission(payload) {
+  var stored = localStorage.getItem(LOCAL_STORAGE_SUBMITTED_KEY);
+  if (!stored) return false;
+  try {
+    var submitted = JSON.parse(stored);
+    if (
+      submitted.name === payload.name &&
+      submitted.payload === getDeterministicPayload(payload)
+    ) {
+      return true;
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
+}
+
+function markAsSubmitted(payload) {
+  localStorage.setItem(
+    LOCAL_STORAGE_SUBMITTED_KEY,
+    JSON.stringify({
+      payload: getDeterministicPayload(payload),
+      submittedAt: new Date().toISOString(),
+      name: payload.name,
+      clientId: payload._clientId,
+    }),
+  );
 }
 
 function restoreLocalPrediction() {
@@ -3655,20 +3707,34 @@ function closeNameModal() {
 }
 
 async function confirmSubmitPrediction() {
-  const input = document.getElementById("playerNameInput");
-  const playerName = input.value.trim();
+  var btn = document.getElementById("confirmNameSubmit");
+  btn.disabled = true;
+
+  var input = document.getElementById("playerNameInput");
+  var playerName = input.value.trim();
 
   if (!playerName) {
     showToast("Please enter your name.", true);
     input.focus();
+    btn.disabled = false;
     return;
   }
 
-  const payload = buildPayload();
+  var payload = buildPayload();
   payload.name = playerName;
   payload._submittedAt = new Date().toISOString();
+  payload._clientId = getClientId();
 
-  const params = new URLSearchParams();
+  if (isDuplicateSubmission(payload)) {
+    showToast(
+      "Ya has enviado esta misma prediccion. Si quieres cambiarla, modifica tus picks y vuelve a enviar.",
+      true,
+    );
+    btn.disabled = false;
+    return;
+  }
+
+  var params = new URLSearchParams();
   params.append(ENTRY_ID, JSON.stringify(payload));
 
   closeNameModal();
@@ -3682,6 +3748,7 @@ async function confirmSubmitPrediction() {
       body: params.toString(),
     });
 
+    markAsSubmitted(payload);
     hideLoading();
     fireConfetti();
     showToast(
@@ -3690,6 +3757,7 @@ async function confirmSubmitPrediction() {
   } catch (e) {
     hideLoading();
     showToast("Error. Inténtalo otra vez o avísame.", true);
+    btn.disabled = false;
   }
 }
 
