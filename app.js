@@ -149,6 +149,7 @@ const AWARD_PLAYERS = [
   // France
   { name: "Kylian Mbappé", country: "France" },
   { name: "Ousmane Dembélé", country: "France" },
+  { name: "Michael Olise", country: "France" },
 
   // England
   { name: "Harry Kane", country: "England" },
@@ -161,6 +162,7 @@ const AWARD_PLAYERS = [
   // Spain
   { name: "Lamine Yamal", country: "Spain" },
   { name: "Nico Williams", country: "Spain" },
+  { name: "Pedri", country: "Spain" },
 
   // Argentina
   { name: "Lionel Messi", country: "Argentina" },
@@ -364,7 +366,12 @@ function getClientId() {
 }
 
 function getDeterministicPayload(payload) {
-  var metadataKeys = ["name", "_submittedAt", "_clientId", "_localDraftSavedAt"];
+  var metadataKeys = [
+    "name",
+    "_submittedAt",
+    "_clientId",
+    "_localDraftSavedAt",
+  ];
   var clone = {};
   Object.keys(payload).forEach(function (k) {
     if (metadataKeys.indexOf(k) === -1) {
