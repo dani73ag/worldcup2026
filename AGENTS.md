@@ -30,6 +30,9 @@ Leaderboard       ← fetch CSV, parse JSON per row, scorePrediction() vs RESULT
 # Instalar dependencias
 pnpm install
 
+# Levantar servidor local
+npx http-server . -p 3000 -c-1 -o
+
 # Run scraper manually (uses Wikipedia API, needs cheerio)
 node scraper/scrape.js
 

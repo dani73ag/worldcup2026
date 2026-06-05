@@ -23,16 +23,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Limpiar datos demo si fecha >= 10 junio 2026
-        run: |
-          TODAY=$(date +%Y-%m-%d)
-          if [[ "$TODAY" > "2026-06-09" ]] || [[ "$TODAY" == "2026-06-10" ]]; then
-            cp results-empty.js results.js
-            echo "🗑️ Demo data borrada — fecha: $TODAY"
-          else
-            echo "📅 Demo data se mantiene hasta el 10 junio 2026 (hoy: $TODAY)"
-          fi
-
       - name: Run scraper
         run: node scraper/scrape.js
 
