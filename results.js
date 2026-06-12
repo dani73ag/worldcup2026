@@ -1,45 +1,52 @@
-// ⚠️ PLANTILLA VACÍA — Este archivo será reemplazado por el scraper cuando comience el Mundial 2026.
-// El workflow de GitHub Actions (update-results.yml) scrapea Wikipedia y sobrescribe este archivo
-// con los resultados reales de cada jornada.
-// Mientras no haya datos reales, la app funciona en modo "sin resultados" (puntuaciones a 0).
 const RESULTS = {
-  groups: {},
-  thirdPlace: [],
-  groupMatches: {},
-
-  knockout: {
-    round32: [],
-    round16: [],
-    quarterfinals: [],
-    semifinals: [],
-
-    champion: "",
-    runnerUp: "",
-    finalists: [],
-
-    thirdPlaceWinner: "",
-    final: "",
-    thirdPlace: "",
-
-    matches: {
-      round32: [],
-      round16: [],
-      quarterfinals: [],
-      semifinals: [],
-      thirdPlace: [],
-      final: [],
-    },
+  "groups": {
+    "A": [
+      "Mexico",
+      "South Korea",
+      "Czech Republic",
+      "South Africa"
+    ]
   },
-
-  semifinalists: [],
-  finalists: [],
-
-  champion: "",
-  runnerUp: "",
-  thirdPlaceWinner: "",
-
-  awards: {
-    goldenBoot: [],
-    goldenBall: [],
+  "thirdPlace": [],
+  "groupMatches": {
+    "A": {
+      "Mexico__South Africa": {
+        "home": 2,
+        "away": 0
+      },
+      "Czech Republic__South Korea": {
+        "home": 1,
+        "away": 2
+      }
+    }
   },
+  "knockout": {
+    "round32": [],
+    "round16": [],
+    "quarterfinals": [],
+    "semifinals": [],
+    "champion": "",
+    "runnerUp": "",
+    "finalists": [],
+    "thirdPlaceWinner": "",
+    "final": "",
+    "thirdPlace": "",
+    "matches": {
+      "round32": [],
+      "round16": [],
+      "quarterfinals": [],
+      "semifinals": [],
+      "thirdPlace": [],
+      "final": []
+    }
+  },
+  "semifinalists": [],
+  "finalists": [],
+  "champion": "",
+  "runnerUp": "",
+  "thirdPlaceWinner": "",
+  "awards": {
+    "goldenBoot": [],
+    "goldenBall": []
+  }
 };

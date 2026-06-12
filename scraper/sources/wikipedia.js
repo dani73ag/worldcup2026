@@ -102,6 +102,10 @@ function matchResultToKeyValue(matchResult, team1, team2) {
   return null;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function scrapeGroups(groups, year = 2026) {
   const allGroupMatches = {};
   const allStandings = {};
@@ -111,6 +115,7 @@ async function scrapeGroups(groups, year = 2026) {
   for (const group of groups) {
     try {
       const html = await fetchGroupPage(group, year);
+      await sleep(500);
       if (!html) {
         console.log(`  Group ${group}: page not available yet, skipping`);
         continue;
@@ -133,6 +138,7 @@ async function scrapeGroups(groups, year = 2026) {
             for (let j = i + 1; j < orderedTeams.length; j++) {
               const t1 = orderedTeams[i];
               const t2 = orderedTeams[j];
+              const [sortedT1, sortedT2] = [t1, t2].sort();
               const key = groupMatchKey(t1, t2);
 
               const wikiResult = wikiMatches.find((rm) => {
@@ -144,7 +150,7 @@ async function scrapeGroups(groups, year = 2026) {
               });
 
               if (wikiResult) {
-                const kv = matchResultToKeyValue(wikiResult, t1, t2);
+                const kv = matchResultToKeyValue(wikiResult, sortedT1, sortedT2);
                 if (kv) {
                   groupMatchMap[key] = kv;
                 }
