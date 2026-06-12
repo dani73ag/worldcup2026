@@ -2149,9 +2149,20 @@ function getMatchResultFromMap(matchMap, match) {
   const directKey = `${match.team1}__${match.team2}`;
   const reverseKey = `${match.team2}__${match.team1}`;
 
-  return (
-    matchMap[sortedKey] || matchMap[directKey] || matchMap[reverseKey] || {}
-  );
+  var result = matchMap[sortedKey] || matchMap[directKey] || matchMap[reverseKey] || {};
+  if (!result || (!result.home && !result.away)) return result || {};
+
+  var usedKey = matchMap[sortedKey] ? sortedKey
+    : matchMap[directKey] ? directKey
+    : reverseKey;
+
+  if (usedKey === reverseKey) {
+    return { home: result.away, away: result.home };
+  }
+  if (usedKey === sortedKey && sortedKey !== directKey) {
+    return { home: result.away, away: result.home };
+  }
+  return result;
 }
 
 function normalizeGroupMatchesForStandings(groupMatches = {}) {
