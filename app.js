@@ -324,6 +324,29 @@ const LOCAL_STORAGE_SUBMITTED_KEY = "wc2026_submitted";
 const LOCAL_STORAGE_CLIENT_ID_KEY = "wc2026_clientId";
 let localSaveTimer = null;
 
+function isTournamentStarted() {
+  return Object.keys(RESULTS.groupMatches || {}).length > 0;
+}
+
+function ensurePredictionsClosed() {
+  if (isTournamentStarted()) {
+    document.body.classList.add("predictions-closed");
+    const banner = document.getElementById("tournamentStartedBanner");
+    if (banner) banner.style.display = "block";
+    const submitBtn = document.getElementById("btnSubmit");
+    if (submitBtn) submitBtn.disabled = true;
+    const resetBtn = document.getElementById("btnReset");
+    if (resetBtn) resetBtn.disabled = true;
+    document
+      .querySelectorAll(
+        "#awardGb1,#awardGb2,#awardGb3,#awardBa1,#awardBa2,#awardBa3",
+      )
+      .forEach((el) => {
+        el.disabled = true;
+      });
+  }
+}
+
 function normalizeLoadedState() {
   ensureAllGroupMatches();
   updateAllGroupOrdersFromMatches();
@@ -332,6 +355,7 @@ function normalizeLoadedState() {
 }
 
 function saveLocalPredictionNow() {
+  if (isTournamentStarted()) return;
   try {
     const payload = buildPayload();
     payload._localDraftSavedAt = new Date().toISOString();
@@ -342,6 +366,7 @@ function saveLocalPredictionNow() {
 }
 
 function saveLocalPredictionSoon() {
+  if (isTournamentStarted()) return;
   clearTimeout(localSaveTimer);
   localSaveTimer = setTimeout(saveLocalPredictionNow, 250);
 }
@@ -956,6 +981,10 @@ function isGroupComplete(group) {
 }
 
 function openGroupResultsModal(group) {
+  if (isTournamentStarted()) {
+    showToast("El torneo ya ha comenzado. No se pueden editar predicciones.", true);
+    return;
+  }
   ensureAllGroupMatches();
 
   const modal = document.getElementById("predictionModal");
@@ -1793,6 +1822,10 @@ function cleanupKnockoutAfterGroupChange(previousMatchTeams) {
 }
 
 function pickWinner(matchNum, slotNum) {
+  if (isTournamentStarted()) {
+    showToast("El torneo ya ha comenzado. No se pueden editar predicciones.", true);
+    return;
+  }
   const mt = state.matchTeams[matchNum];
   if (!mt) return;
   const team = slotNum === 1 ? mt.team1 : mt.team2;
@@ -1808,6 +1841,7 @@ function pickWinner(matchNum, slotNum) {
 }
 
 function clearKnockoutAndRender(team) {
+  if (isTournamentStarted()) return;
   if (!team) return;
   Object.keys(state.knockoutResults).forEach((k) => {
     if (state.knockoutResults[k] === team) delete state.knockoutResults[k];
@@ -1875,6 +1909,7 @@ function closeAwardPickerModal() {
 }
 
 function openAwardPickerModal(select) {
+  if (isTournamentStarted()) return;
   const overlay = ensureAwardPickerModal();
   const list = overlay.querySelector("#awardPickerList");
   const title = overlay.querySelector("#awardPickerTitle");
@@ -3695,6 +3730,10 @@ const FORM_ACTION =
   "https://docs.google.com/forms/d/e/" + FORM_ID + "/formResponse";
 
 function submitPrediction() {
+  if (isTournamentStarted()) {
+    showToast("El torneo ya ha comenzado. No se aceptan nuevas predicciones.", true);
+    return;
+  }
   openNameModal();
 }
 
@@ -3712,6 +3751,10 @@ function closeNameModal() {
 }
 
 async function confirmSubmitPrediction() {
+  if (isTournamentStarted()) {
+    showToast("El torneo ya ha comenzado. No se aceptan nuevas predicciones.", true);
+    return;
+  }
   var btn = document.getElementById("confirmNameSubmit");
   btn.disabled = true;
 
@@ -3778,6 +3821,10 @@ function renderAll() {
 }
 
 function resetState() {
+  if (isTournamentStarted()) {
+    showToast("El torneo ya ha comenzado. No se pueden borrar predicciones.", true);
+    return;
+  }
   GROUP_NAMES.forEach((g) => {
     state.groups[g] = TEAMS_BY_GROUP[g].map((t) => t.name);
   });
@@ -3877,6 +3924,7 @@ async function init() {
     }
   });
 
+  ensurePredictionsClosed();
   restoreLocalPrediction();
   fillAwards(state.awards);
   computeMatchTeams();

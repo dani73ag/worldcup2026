@@ -1045,6 +1045,50 @@ header .subtitle {
 }
 .toolbar-btn:hover { background: var(--field-green); border-color: var(--grass-green); }
 
+body.predictions-closed .toolbar-btn,
+body.predictions-closed .submit-btn {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+body.predictions-closed .group-box,
+body.predictions-closed .bracket-team {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+body.predictions-closed .group-box:hover {
+  transform: none;
+  box-shadow: var(--shadow-soft);
+}
+
+body.predictions-closed .award-custom-trigger {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.banner {
+  text-align: center;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  margin: 16px auto;
+  max-width: 680px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.banner-warning {
+  background: #FFF3E0;
+  border: 2px solid #FF9800;
+  color: #E65100;
+}
+
+.banner-warning strong {
+  font-weight: 800;
+}
+
 /* ---- Filters on Leaderboard ---- */
 .filter-bar {
   display: flex;
