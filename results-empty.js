@@ -1,5 +1,3 @@
-// ⚠️ PLANTILLA VACÍA — Copia de seguridad de results.js.
-// Mantener sincronizado con results.js.
 const RESULTS = {
   groups: {},
   thirdPlace: [],
@@ -20,13 +18,60 @@ const RESULTS = {
     thirdPlace: "",
 
     matches: {
-      round32: [],
-      round16: [],
-      quarterfinals: [],
-      semifinals: [],
-      thirdPlace: [],
-      final: [],
-    },
+      round32: [
+        // {
+        //   match: 73,
+        //   team1: "",
+        //   team2: "",
+        //   winner: ""
+        // }
+      ],
+
+      round16: [
+        // {
+        //   match: 89,
+        //   team1: "",
+        //   team2: "",
+        //   winner: ""
+        // }
+      ],
+
+      quarterfinals: [
+        // {
+        //   match: 97,
+        //   team1: "",
+        //   team2: "",
+        //   winner: ""
+        // }
+      ],
+
+      semifinals: [
+        // {
+        //   match: 101,
+        //   team1: "",
+        //   team2: "",
+        //   winner: ""
+        // }
+      ],
+
+      thirdPlace: [
+        // {
+        //   match: 103,
+        //   team1: "",
+        //   team2: "",
+        //   winner: ""
+        // }
+      ],
+
+      final: [
+        // {
+        //   match: 104,
+        //   team1: "",
+        //   team2: "",
+        //   winner: ""
+        // }
+      ]
+    }
   },
 
   semifinalists: [],
@@ -38,6 +83,6 @@ const RESULTS = {
 
   awards: {
     goldenBoot: [],
-    goldenBall: [],
-  },
+    goldenBall: []
+  }
 };
