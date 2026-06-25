@@ -1,8 +1,23 @@
 const RESULTS = {
   "groups": {
-    "A": [],
-    "B": [],
-    "C": [],
+    "A": [
+      "Mexico",
+      "South Africa",
+      "South Korea",
+      "Czech Republic"
+    ],
+    "B": [
+      "Switzerland",
+      "Canada",
+      "Bosnia & Herzegovina",
+      "Qatar"
+    ],
+    "C": [
+      "Brazil",
+      "Morocco",
+      "Scotland",
+      "Haiti"
+    ],
     "D": [],
     "E": [],
     "F": [],
@@ -19,19 +34,25 @@ const RESULTS = {
       "Mexico__South Africa": { "home": 2, "away": 0 },
       "South Korea__Czech Republic": { "home": 2, "away": 1 },
       "Czech Republic__South Africa": { "home": 1, "away": 1 },
-      "Mexico__South Korea": { "home": 1, "away": 0 }
+      "Mexico__South Korea": { "home": 1, "away": 0 },
+      "Czech Republic__Mexico": { "home": 0, "away": 3 },
+      "South Africa__South Korea": { "home": 1, "away": 0 }
     },
     "B": {
       "Canada__Bosnia & Herzegovina": { "home": 1, "away": 1 },
       "Qatar__Switzerland": { "home": 1, "away": 1 },
       "Switzerland__Bosnia & Herzegovina": { "home": 4, "away": 1 },
-      "Canada__Qatar": { "home": 6, "away": 0 }
+      "Canada__Qatar": { "home": 6, "away": 0 },
+      "Switzerland__Canada": { "home": 2, "away": 1 },
+      "Bosnia & Herzegovina__Qatar": { "home": 3, "away": 1 }
     },
     "C": {
       "Brazil__Morocco": { "home": 1, "away": 1 },
       "Haiti__Scotland": { "home": 0, "away": 1 },
       "Scotland__Morocco": { "home": 0, "away": 1 },
-      "Brazil__Haiti": { "home": 3, "away": 0 }
+      "Brazil__Haiti": { "home": 3, "away": 0 },
+      "Scotland__Brazil": { "home": 0, "away": 3 },
+      "Morocco__Haiti": { "home": 4, "away": 2 }
     },
     "D": {
       "USA__Paraguay": { "home": 4, "away": 1 },
@@ -65,20 +86,27 @@ const RESULTS = {
     },
     "I": {
       "France__Senegal": { "home": 3, "away": 1 },
-      "Iraq__Norway": { "home": 1, "away": 4 }
+      "Iraq__Norway": { "home": 1, "away": 4 },
+      "France__Iraq": { "home": 3, "away": 0 },
+      "Norway__Senegal": { "home": 3, "away": 2 }
     },
     "J": {
       "Argentina__Algeria": { "home": 3, "away": 0 },
       "Austria__Jordan": { "home": 3, "away": 1 },
-      "Argentina__Austria": { "home": 2, "away": 0 }
+      "Argentina__Austria": { "home": 2, "away": 0 },
+      "Jordan__Algeria": { "home": 1, "away": 2 }
     },
     "K": {
       "Portugal__DR Congo": { "home": 1, "away": 1 },
-      "Uzbekistan__Colombia": { "home": 1, "away": 3 }
+      "Uzbekistan__Colombia": { "home": 1, "away": 3 },
+      "Portugal__Uzbekistan": { "home": 5, "away": 0 },
+      "Colombia__DR Congo": { "home": 1, "away": 0 }
     },
     "L": {
       "England__Croatia": { "home": 4, "away": 2 },
-      "Ghana__Panama": { "home": 1, "away": 0 }
+      "Ghana__Panama": { "home": 1, "away": 0 },
+      "England__Ghana": { "home": 0, "away": 0 },
+      "Panama__Croatia": { "home": 0, "away": 1 }
     }
   },
   "knockout": {
