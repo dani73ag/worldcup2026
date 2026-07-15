@@ -216,10 +216,14 @@ const RESULTS = {
       "England",
       "Argentina"
     ],
-    "semifinals": [],
+    "semifinals": [
+      "Spain"
+    ],
     "champion": "",
     "runnerUp": "",
-    "finalists": [],
+    "finalists": [
+      "Spain"
+    ],
     "thirdPlaceWinner": "",
     "final": "",
     "thirdPlace": "",
@@ -403,7 +407,7 @@ const RESULTS = {
           "match": 101,
           "team1": "France",
           "team2": "Spain",
-          "winner": null
+          "winner": "Spain"
         },
         {
           "match": 102,
@@ -412,8 +416,22 @@ const RESULTS = {
           "winner": null
         }
       ],
-      "thirdPlace": [],
-      "final": []
+      "thirdPlace": [
+        {
+          "match": 103,
+          "team1": "France",
+          "team2": null,
+          "winner": null
+        }
+      ],
+      "final": [
+        {
+          "match": 104,
+          "team1": "Spain",
+          "team2": null,
+          "winner": null
+        }
+      ]
     }
   },
   "semifinalists": [
@@ -422,7 +440,9 @@ const RESULTS = {
     "England",
     "Argentina"
   ],
-  "finalists": [],
+  "finalists": [
+    "Spain"
+  ],
   "champion": "",
   "runnerUp": "",
   "thirdPlaceWinner": "",
