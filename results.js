@@ -217,16 +217,18 @@ const RESULTS = {
       "Argentina"
     ],
     "semifinals": [
-      "Spain"
+      "Spain",
+      "Argentina"
     ],
-    "champion": "",
-    "runnerUp": "",
+    "champion": "Spain",
+    "runnerUp": "Argentina",
     "finalists": [
-      "Spain"
+      "Spain",
+      "Argentina"
     ],
-    "thirdPlaceWinner": "",
-    "final": "",
-    "thirdPlace": "",
+    "thirdPlaceWinner": "England",
+    "final": "Spain",
+    "thirdPlace": "England",
     "matches": {
       "round32": [
         {
@@ -413,23 +415,23 @@ const RESULTS = {
           "match": 102,
           "team1": "England",
           "team2": "Argentina",
-          "winner": null
+          "winner": "Argentina"
         }
       ],
       "thirdPlace": [
         {
           "match": 103,
           "team1": "France",
-          "team2": null,
-          "winner": null
+          "team2": "England",
+          "winner": "England"
         }
       ],
       "final": [
         {
           "match": 104,
           "team1": "Spain",
-          "team2": null,
-          "winner": null
+          "team2": "Argentina",
+          "winner": "Spain"
         }
       ]
     }
@@ -441,13 +443,22 @@ const RESULTS = {
     "Argentina"
   ],
   "finalists": [
-    "Spain"
+    "Spain",
+    "Argentina"
   ],
-  "champion": "",
-  "runnerUp": "",
-  "thirdPlaceWinner": "",
+  "champion": "Spain",
+  "runnerUp": "Argentina",
+  "thirdPlaceWinner": "England",
   "awards": {
-    "goldenBoot": [],
-    "goldenBall": []
+    "goldenBoot": [
+      "Kylian Mbappé",
+      "Lionel Messi",
+      "Jude Bellingham"
+    ],
+    "goldenBall": [
+      "Rodri",
+      "Lionel Messi",
+      "Kylian Mbappé"
+    ]
   }
 };
